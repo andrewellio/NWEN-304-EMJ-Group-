@@ -2,4 +2,29 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p WELCOME to #{title}
+  
+  p This is what is known as the index page
+  
+ 
+  p Several files are used to display this page... but basically: 
+  
+  p "bin/www" is the file which setups up local host (linked to several other files) this is at localhost:3000, with GET and all other things
+  
+  p "node_modules" are the dependencies defined in package.json, should only be needed to be downloaded once via npm install unless new dependencies are added (this folder should not be uploaded to gitlab)
+  
+  p "public/stylesheets/style.css" defines basic style formatting for the pages
+  
+  p "routes/index.js" does a GET request to get the homepage and specifies the title "Express"
+  
+  p "test/test.js" will need to be implemented later to do testing via npm test/test
+  
+  p "views/index.pug" is sort of the rest of the html code. This is where all the webpages are to be installed, they are using pug at the moment but we can choose to use ejs later, or to stick with pug
+  
+  p "package.json" defines all the dependencies and commands such as npm start (shouldn't need to be edited mostly"
+  
+  p SO OVERALL npm install (should only need to be done once) and npm start. As soon as you type in localhost:3000 web_server is shown
+  
+  
+  
+  
