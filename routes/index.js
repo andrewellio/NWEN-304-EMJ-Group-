@@ -7,43 +7,43 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/HomePage', function(req, res, next) {
-  res.render('HomePage', { title: 'Express' });
+router.get('/home', function(req, res, next) {
+  res.render('home', { title: 'Express' });
 });
 
 /* GET movies page. */
-router.get('/MoviesList', function(req, res, next) {
-  res.render('MoviesList', { title: 'Express' });
+router.get('/movieslist', function(req, res, next) {
+  res.render('movieslist', { title: 'Express' });
 });
 
 /* GET search page. */
-router.get('/Search', function(req, res, next) {
-  res.render('Search', { title: 'Express' });
+router.get('/search', function(req, res, next) {
+  res.render('search', { title: 'Express' });
 });
 
 /* GET cart page. */
-router.get('/ShoppingCart', function(req, res, next) {
-  res.render('ShoppingCart', { title: 'Express' });
+router.get('/shoppingcart', function(req, res, next) {
+  res.render('shoppingcart', { title: 'Express' });
 });
 
 /* GET account page. */
-router.get('/MyAccount', function(req, res, next) {
-  res.render('MyAccount', { title: 'Express' });
+router.get('/myaccount', function(req, res, next) {
+  res.render('myaccount', { title: 'Express' });
 });
 
 /* GET login page. */
-router.get('/Login', function(req, res, next) {
-  res.render('Login', { title: 'Express' });
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'Express' });
 });
 
 /* GET register page. */
-router.get('/Register', function(req, res, next) {
-  res.render('Register', { title: 'Express' });
+router.get('/register', function(req, res, next) {
+  res.render('register', { title: 'Express' });
 });
 
 /* GET admin page. */
-router.get('/Admin', function(req, res, next) {
-  res.render('Admin', { title: 'Express' });
+router.get('/admin', function(req, res, next) {
+  res.render('admin', { title: 'Express' });
 });
 
 module.exports = router;
