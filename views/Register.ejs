@@ -1,3 +1,62 @@
 <%- include('layout.ejs') %>
 <%- include('partials/navbar.ejs') %>
-<p>This is what is known as the register page (Hello there!)</p>
+
+<!--Template Form from https://www.w3schools.com/howto/howto_css_register_form.asp-->
+
+<form action="</FILENAME TO PROCESS REGISTRATION HERE.php>">
+  <div class="container">
+    <h1>Register</h1>
+    <p>To create an account, please fill in the form below.</p>
+
+    <hr>
+    <label for="name"><b>Full Name</b></label>
+    <input type="text" placeholder="Enter Full Name" name="name" id="name" required>
+
+    <label for="usr"><b>User Name</b></label>
+    <input type="text" placeholder="Enter User Name" name="usr" id="usr" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <hr>
+
+    <button type="submit" class="registerbtn">Register</button>
+  </div>
+
+   <p>Already have an account? <a href="login.ejs">Log in</a>.</p>
+
+    <style>
+      /* Full-width input fields */
+      input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+      }
+      
+      /* Overwrite default styles of hr */
+      hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+      }
+      
+      /* Set a style for the submit button */
+      .registerbtn {
+        background-color: #4c98af;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+      }
+      
+      .registerbtn:hover {
+        opacity: 1;
+      }
+      </style>
+
+
+
