@@ -6,6 +6,7 @@
 
 <!--If JS function is needed to assist with registration process, add below... onsubmit="complete_registration()"-->
 <form action="/FILENAME TO PROCESS REGISTRATION HERE.php" >
+  <!--name, usr and psw parameters must be removed from URL (i.e should use a POST)-->
   <div class="container">
     <h1>Register</h1>
     <p>To create an account, please fill in the form below.</p>
@@ -22,7 +23,7 @@
     <input type="password" onchange="validate_password()" placeholder="Enter Password" name="psw" id="psw" required>
     <hr>
 
-    <button type="submit" class="registerbtn">Register</button>
+    <button type="submit" class="registerbtn"><b>Register</b></button>
   </div>
 
    <p>Already have an account? <a href="login">Log in</a>.</p>
@@ -54,6 +55,7 @@
         cursor: pointer;
         width: 100%;
         opacity: 0.9;
+        font-size: larger;
       }
       
       .registerbtn:hover {
