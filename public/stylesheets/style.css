@@ -1,10 +1,10 @@
 body {
+  padding: 10px;
   font: 14px "Lucida Grande";
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/*
+/* Add a blue text color to links */
 a {
-  color: #00B7FF;
+  color: dodgerblue;
 }
-/*
