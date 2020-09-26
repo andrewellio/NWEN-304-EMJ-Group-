@@ -1,3 +1,105 @@
-<%- include('layout.ejs') %>
-<%- include('partials/navbar.ejs') %>
+<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
 <p>This is what is known as the admin page (Hello there!)</p>
+
+<form>
+  <div class="container">
+    <h1>Upload</h1>
+    <p>To upload a movie, please fill in the form below.</p>
+
+    <hr />
+    <label for="title"><b>Title</b></label>
+    <input
+      type="text"
+      placeholder="Enter movie title"
+      name="title"
+      id="title"
+      required
+    />
+    <br />
+
+    <label for="directors"><b>Director(s)</b></label>
+    <input
+      type="text"
+      placeholder="Enter name of director(s)"
+      name="directors"
+      id="directors"
+      required
+    />
+    <br />
+
+    <label for="cast"><b>Cast</b></label>
+
+    <input
+      type="text"
+      placeholder="Enter cast"
+      name="cast"
+      id="cast"
+      required
+    />
+    <br />
+
+    <label for="genres"><b>Genres</b></label>
+
+    <input
+      type="text"
+      placeholder="Enter genres"
+      name="genres"
+      id="genres"
+      required
+    />
+    <br />
+    <label><b>Runtime (in minutes)</b></label>
+    <input
+      type="number"
+      placeholder="Enter runtime (minutes)"
+      name="runtime"
+      id="runtime"
+      required
+    />
+    <br />
+    <label><b>Year of release:</b></label>
+    <input
+      type="number"
+      placeholder="Enter year of release"
+      name="year"
+      id="year"
+      required
+    />
+    <br />
+    <label><b>Plot Summary:</b></label>
+    <input
+      type="string"
+      placeholder="Enter summary"
+      name="summary"
+      id="summary"
+      required
+    />
+    <br />
+    <label><b>Price:</b></label>
+    <input
+      type="number"
+      placeholder="Enter price"
+      name="price"
+      id="price"
+      required
+    />
+    <br />
+
+    <label><b>Trailer:</b></label>
+    <input
+      type="genres"
+      placeholder="Enter genres"
+      name="genres"
+      id="genres"
+      required
+    />
+    <br />
+
+    <hr />
+    <label>Store current date and time for</label>
+    <p>Date added</p>
+    <p>Last edited</p>
+
+    <button type="submit" class="registerbtn">Upload</button>
+  </div>
+</form>

@@ -1,3 +1,45 @@
-<%- include('layout.ejs') %>
-<%- include('partials/navbar.ejs') %>
+<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
 <p>This is what is known as the Movie List page (Hello there!)</p>
+
+<a href="/movie">Movie</a>
+
+<p>Filter by Genres</p>
+<p>Latest to Earliest</p>
+<p>Order by Title, Price, Length</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Poster</th>
+      <th>Director(s)</th>
+      <th>Cast</th>
+      <th>Genres</th>
+      <th>Length (in minutes)</th>
+      <th>Year</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td>Poster</td>
+      <td>Director(s)</td>
+      <td>Cast</td>
+      <td>Genres</td>
+      <td>Length (in minutes)</td>
+      <td>Year</td>
+      <td>Price</td>
+    </tr>
+    <tr>
+      <td>Arrival</td>
+      <td>Poster</td>
+      <td>Denis Villeneuve</td>
+      <td>Amy Adams, Jeremy Renner, Forest Whitaler</td>
+      <td>Drama, Mystery, Sci-Fi</td>
+      <td>116</td>
+      <td>2016</td>
+      <td>$10</td>
+    </tr>
+  </tbody>
+</table>
