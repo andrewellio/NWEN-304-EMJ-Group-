@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var controller = require("../controllers/moviesController.js");
 
 /* GET index page. */
 router.get("/", function (req, res, next) {
@@ -18,8 +19,12 @@ router.get("/movieslist", function (req, res, next) {
 
 /* GET movie page. */
 router.get("/movie", function (req, res, next) {
-  res.render("movie", { title: "Express" });
+  res.render("movie", { title: "Express"});
 });
+
+/* GET dynamic movie page. */
+
+router.get("/movies/:id", controller.getDynamicMovieDetails);
 
 /* GET search page. */
 router.get("/search", function (req, res, next) {
