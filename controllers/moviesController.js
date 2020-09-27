@@ -16,12 +16,10 @@ movie2.add();
 exports.getDynamicMovieDetails = (req, res, next) => {
   id = req.params.id;
   mov = Movie.search(id);
-  console.log(mov.title);
   res.render("movie", {"pageTitle" : mov.title, "movie" : mov});
 }
 
 exports.getMoviesPage = (req, res, next) => {
   movieList = Movie.all();
-  console.log(movieList[0].title);
   res.render("movieslist", {"movies" : movieList});
 }
