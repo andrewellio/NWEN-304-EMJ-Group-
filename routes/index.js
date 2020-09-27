@@ -23,7 +23,6 @@ router.get("/movie", function (req, res, next) {
 });
 
 /* GET dynamic movie page. */
-
 router.get("/movies/:id", controller.getDynamicMovieDetails);
 
 /* GET search page. */

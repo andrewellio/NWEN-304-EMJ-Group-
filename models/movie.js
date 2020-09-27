@@ -13,9 +13,21 @@ module.exports = class Movie{
       this.ageRating = ageRating;
       this.price = price;
     }
+
+  add() {
+    movies.push(this);
+  }
+
+  static search(id) {
+    var foundMovie = null;
+    movies.forEach(function(movie){
+			if(movie.id == id){
+				foundMovie = movie;
+			}
+		})
+		return foundMovie;
+  }
 }
 
-add() {
-  movies.add(this);
-}
+
 
