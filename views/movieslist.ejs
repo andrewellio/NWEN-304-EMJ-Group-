@@ -1,9 +1,4 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
-<head>
-  <script src = "/controllers/moviesController.js"></script>
-  <script src = "/models/movie.js"></script>
-  <script src = "/models/movieOperations.js"></script>
-</head>
 
 <p>This is what is known as the Movie List page (Hello there!)</p>
 
@@ -27,25 +22,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Title</td>
-      <td>Poster</td>
-      <td>Director(s)</td>
-      <td>Cast</td>
-      <td>Genres</td>
-      <td>Length (in minutes)</td>
-      <td>Year</td>
-      <td>Price</td>
-    </tr>
-    <tr>
-      <td>Arrival</td>
-      <td>Poster</td>
-      <td>Denis Villeneuve</td>
-      <td>Amy Adams, Jeremy Renner, Forest Whitaler</td>
-      <td>Drama, Mystery, Sci-Fi</td>
-      <td>116</td>
-      <td>2016</td>
-      <td>$10</td>
-    </tr>
+    <% for(var i = 0; i < movies.length; i++) {%>
+      <tr>
+        <td><%= movies[i].title %></td>
+        <td>Poster</td>
+        <td><%= movies[i].director %></td>
+        <td><%= movies[i].actors %></td>
+        <td><%= movies[i].genres %></td>
+        <td><%= movies[i].runtime %></td>
+        <td><%= movies[i].release %></td>
+        <td>$<%= movies[i].price %></td>
+      </tr>>
+    <% } %>
   </tbody>
 </table>

@@ -27,6 +27,10 @@ module.exports = class Movie{
 		})
 		return foundMovie;
   }
+
+  static all() {
+    return movies;
+  }
 }
 
 

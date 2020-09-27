@@ -19,3 +19,9 @@ exports.getDynamicMovieDetails = (req, res, next) => {
   console.log(mov.title);
   res.render("movie", {"pageTitle" : mov.title, "movie" : mov});
 }
+
+exports.getMoviesPage = (req, res, next) => {
+  movieList = Movie.all();
+  console.log(movieList[0].title);
+  res.render("movieslist", {"movies" : movieList});
+}

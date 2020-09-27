@@ -13,9 +13,7 @@ router.get("/home", function (req, res, next) {
 });
 
 /* GET movies page. */
-router.get("/movieslist", function (req, res, next) {
-  res.render("movieslist", { title: "Express" });
-});
+router.get("/movieslist", controller.getMoviesPage);
 
 /* GET movie page. */
 router.get("/movie", function (req, res, next) {
