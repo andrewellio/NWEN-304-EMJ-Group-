@@ -1,29 +1,51 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
-<p>This is what is known as the shopping cart page (Hello there!)</p>
 
-<p>If customer's cart is empty:</p>
-<p>Your cart is empty</p>
+<body onload="loadTable()">
+  <p>This is what is known as the shopping cart page (Hello there!)</p>
 
-<p>If customer's cart isn't empty:</p>
-<table>
-  <thead>
-    <tr>
-      <th>Remove</th>
-      <th>Poster</th>
-      <th>Title(s)</th>
-      <th>Price</th>
-      <th>Type (hire e.g.)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Trash can icon</td>
-      <td>Poster</td>
-      <td><a href="/movie-test">Arrival</a></td>
-      <td>Price</td>
-      <td>Rent</td>
-    </tr>
-  </tbody>
-</table>
-<p>Press to hire</p>
-<button>Proceed to checkout</button>
+  <div id="empty">
+    <p>Your cart is empty</p>
+    <a href="/movieslist"> <button>Search for movies</button></a>
+  </div>
+
+  <div id="notEmpty">
+    <p>If customer's cart isn't empty:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Remove</th>
+          <th>Poster</th>
+          <th>Title(s)</th>
+          <th>Price</th>
+          <th>Type (hire e.g.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trash can icon</td>
+          <td>Poster</td>
+          <td><a href="/movie-test">Arrival</a></td>
+          <td>Price</td>
+          <td>Rent</td>
+        </tr>
+      </tbody>
+    </table>
+    <button>Proceed to checkout</button>
+  </div>
+</body>
+<script>
+  var cart = [];
+  function deleteEntry() {
+    loadTable();
+  }
+
+  function loadTable() {
+    if (cart.length > 0) {
+      document.getElementById("empty").style.display = "none";
+      document.getElementById("notEmpty").style.display = "block";
+    } else {
+      document.getElementById("empty").style.display = "block";
+      document.getElementById("notEmpty").style.display = "none";
+    }
+  }
+</script>
