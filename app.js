@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/home", indexRouter);
 app.use("/movie", indexRouter);
+app.use("/movie-test", indexRouter);
 app.use("/movieslist", indexRouter);
 app.use("/search", indexRouter);
 app.use("/shoppingcart", indexRouter);

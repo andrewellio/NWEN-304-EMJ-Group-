@@ -1,0 +1,58 @@
+<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
+
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+</head>
+
+<div class="container">
+  <h1>Arrival</h1>
+  <img
+    src="https://m.media-amazon.com/images/M/MV5BMTExMzU0ODcxNDheQTJeQWpwZ15BbWU4MDE1OTI4MzAy._V1_.jpg"
+    width="30%"
+  />
+
+  <p><b>Director:</b> Denis Villeneuve</p>
+  <div>
+    <p>
+      <b>Age Rating</b> <img src="/images/M-rating.png" width="50" alt="" />
+    </p>
+  </div>
+  <p><b> Cast: </b></p>
+  <p>
+    Amy Adams <br />
+    Jeremy Renner <br />
+    Forest Whitaker <br />
+    Michael Stuhlbarg <br />
+    Tzi Ma <br />
+  </p>
+  <p>Genres: Drama, Mystery, Sci-Fi</p>
+
+  <p>Length: 116 minutes</p>
+  <p>Year of release: 2016</p>
+  <p>
+    Plot Summary: A linguist works with the military to communicate with alien
+    lifeforms after twelve mysterious spacecraft appear around the world.
+  </p>
+  <p>Price:</p>
+
+  <p>Trailer:</p>
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/tFMo3UJ4B4g"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+
+  <button>Add to Cart (if logged in)</button> <br />
+  <a href="/login"> <button href="/login">Log in to add to cart</button> </a
+  ><br />
+
+  <button type="button" class="btn btn-primary">Edit</button>
+</div>
