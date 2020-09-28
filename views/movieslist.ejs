@@ -31,7 +31,7 @@
 
     <% for(var i = 0; i < movies.length; i++) {%>
       <tr>
-        <td><%= movies[i].title %></td>
+        <td><a href = "/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a></td>
         <td>Poster</td>
         <td><%= movies[i].director %></td>
         <td><%= movies[i].actors %></td>
@@ -39,6 +39,7 @@
         <td><%= movies[i].runtime %></td>
         <td><%= movies[i].release %></td>
         <td>$<%= movies[i].price %></td>
+        <td><%= movies[i].ageRating %></td>
       </tr>>
     <% } %>
 
