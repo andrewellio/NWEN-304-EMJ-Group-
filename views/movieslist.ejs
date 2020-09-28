@@ -4,8 +4,13 @@
 <a href="/movie">Movie</a>
 
 <p>Filter by Genres</p>
-<p>Latest to Earliest</p>
-<p>Order by Title, Price, Length</p>
+<Label>Action</Label>
+<input type="checkbox" />
+<p>Filter by Year (decade)</p>
+<p>Filter by age rating</p>
+<p>Order by Title, Price, Length, Year</p>
+
+<p>Ascending or Descending</p>
 
 <table>
   <thead>
@@ -18,6 +23,7 @@
       <th>Length (in minutes)</th>
       <th>Year</th>
       <th>Price</th>
+      <th>Age Rating</th>
     </tr>
   </thead>
   <tbody>
@@ -30,9 +36,10 @@
       <td>Length (in minutes)</td>
       <td>Year</td>
       <td>Price</td>
+      <td>Age Rating</td>
     </tr>
     <tr>
-      <td>Arrival</td>
+      <td><a href="/movie-test">Arrival</a></td>
       <td>Poster</td>
       <td>Denis Villeneuve</td>
       <td>Amy Adams, Jeremy Renner, Forest Whitaler</td>
@@ -40,6 +47,29 @@
       <td>116</td>
       <td>2016</td>
       <td>$10</td>
+      <td>M</td>
     </tr>
   </tbody>
 </table>
+
+<script>
+  var genres = [];
+  var decades = [];
+  var ageRatings = [];
+  //  Latest to Earliest
+  //Order by Title, Price, Length
+
+  function changeFilter() {}
+
+  function getList() {
+    //check filter
+    if (genres.length > 0) {
+    }
+
+    if (decades.length > 0) {
+    }
+
+    if (ageRatings.length > 0) {
+    }
+  }
+</script>

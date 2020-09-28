@@ -1,35 +1,26 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
 <p>This is what is known as the search page (Hello there!)</p>
 
-<p>Search bar</p>
-
-<p>Filter</p>
-
 <input
   type="text"
   id="myInput"
-  onkeyup="myFunction()"
-  placeholder="Search for movies.."
+  onkeyup="search()"
+  placeholder="Search for movies, directors and actors.."
 />
 
-<p>If searching for titles, searches input through titles</p>
+<p>Searches input through titles, directors and actors</p>
 
 <button>Press search</button>
 
-<input
-  type="text"
-  id="myInput"
-  onkeyup="myFunction()"
-  placeholder="Search for actors/directors.."
-/>
-<p>
-  If searching for actors/directors, searches input through actors/directors
-</p>
+<div id="search" style="display: none">
+  <p>Table after search</p>
+  <h2>Results</h2>
+  <div id="results">
+    <p id="example">This is example</p>
+  </div>
 
-<button>Press search</button>
-<p>Table after search</p>
-
-<p>Filter results</p>
+  <div id="no-results"><p>No results</p></div>
+</div>
 
 <style>
   #myInput {
@@ -65,3 +56,21 @@
     background-color: #eee; /* Add a hover effect to all links, except for headers */
   }
 </style>
+
+<script>
+  var array = ["movie"];
+  function search() {
+    var x = document.getElementById("search");
+
+    x.style.display = "block";
+    if (array.length > 0) {
+      document.getElementById("results").style.display = "block";
+      document.getElementById("no-results").style.display = "none";
+      document.getElementById("example").innerHTML =
+        array.length + " results found";
+    } else {
+      document.getElementById("results").style.display = "none";
+      document.getElementById("no-results").style.display = "block";
+    }
+  }
+</script>

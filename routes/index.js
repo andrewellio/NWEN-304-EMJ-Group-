@@ -21,6 +21,11 @@ router.get("/movie", function (req, res, next) {
   res.render("movie", { title: "Express" });
 });
 
+/* GET movie page. */
+router.get("/movie-test", function (req, res, next) {
+  res.render("movie-test", { title: "Express" });
+});
+
 /* GET search page. */
 router.get("/search", function (req, res, next) {
   res.render("search", { title: "Express" });
