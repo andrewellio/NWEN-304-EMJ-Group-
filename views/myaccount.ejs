@@ -1,4 +1,63 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
-<p>This is what is known as the My Account page (Hello there!)</p>
 
-<p>Name</p>
+<body onload="loadPurchases()">
+  <div>
+    <h1>My account</h1>
+
+    <p>Name</p>
+
+    <p>Email</p>
+
+    <h2>Past purchases</h2>
+
+    <div>
+      <div id="purchases">
+        <p>Title</p>
+        <p>Link</p>
+        <p>Price</p>
+      </div>
+
+      <div id="no-purchases">
+        <p>You have no purchases</p>
+      </div>
+    </div>
+
+    <button onClick="passwordFunction()">Want to change password?</button>
+    <br />
+    <div id="changePassword" style="display: none">
+      <div>
+        <label for="">Current Password</label>
+        <input type="text" required />
+        <label for="">New Password</label>
+        <input type="text" required />
+        <label for="">Re-type new password</label>
+        <input type="text" required />
+      </div>
+      <p>Forgot your password?</p>
+      <button>Change password</button>
+    </div>
+  </div>
+</body>
+
+<script>
+  var purchases = [];
+
+  function loadPurchases() {
+    if (purchases.length > 0) {
+      document.getElementById("purchases").style.display = "block";
+      document.getElementById("no-purchases").style.display = "none";
+    } else {
+      document.getElementById("purchases").style.display = "none";
+      document.getElementById("no-purchases").style.display = "block";
+    }
+  }
+
+  function passwordFunction() {
+    var x = document.getElementById("changePassword");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
