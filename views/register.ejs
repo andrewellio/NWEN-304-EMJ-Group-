@@ -4,8 +4,7 @@
 <!--Template Form from https://www.w3schools.com/howto/howto_css_register_form.asp-->
 <!--Password Complexity JS from https://www.geeksforgeeks.org/validate-a-password-using-html-and-javascript/-->
 
-<!--If JS function is needed to assist with registration process, add below... onsubmit="complete_registration()"-->
-<form action="/FILENAME TO PROCESS REGISTRATION HERE.php" >
+<form action="" onsubmit="add_user()">
   <!--name, usr and psw parameters must be removed from URL (i.e should use a POST)-->
   <div class="container">
     <h1>Register</h1>
@@ -14,6 +13,9 @@
     <hr>
     <label for="name"><b>Full Name</b></label>
     <input type="text" placeholder="Enter Full Name" name="name" id="name" required>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
     <label for="usr"><b>User Name</b></label>
     <input type="text" placeholder="Enter User Name" name="usr" id="usr" required>
@@ -73,6 +75,9 @@
                 /[^a-zA-Z\d]/g) && str.length >= 8)) 
         alert("Your password must contain 1 lowercase, uppercase, digit, special character and must also be at least 8 characters long.");
     } 
+  function add_user() {
+console.print("hi");
+  }
 </script>
 
 
