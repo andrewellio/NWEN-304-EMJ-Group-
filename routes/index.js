@@ -21,7 +21,7 @@ router.get("/movie", function (req, res, next) {
 });
 
 /* GET dynamic movie page. */
-router.get("/movies/:id", controller.getDynamicMovieDetails);
+router.get("/movieslist/:id", controller.getDynamicMovieDetails);
 
 /* GET search page. */
 router.get("/search", function (req, res, next) {
