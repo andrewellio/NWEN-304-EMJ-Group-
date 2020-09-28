@@ -1,21 +1,27 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
 <p>This is what is known as the Movie page (Hello there!)</p>
 
-<p>Movie name</p>
+<p><%= movie.title %></p>
 
 <p>Poster</p>
-<img />
-
-<p>Director:</p>
-<p>Cast:</p>
-<p>Genres</p>
-<p>Age Rating</p>
-<p>Length (in minutes)</p>
-<p>Year of release:</p>
-<p>Plot Summary:</p>
-<p>Price:</p>
+<img src="<%= movie.poster %>" width="30%"/>
+<p>Director: <%= movie.director %></p>
+<p>Cast: <%= movie.actors %></p>
+<p>Genres: <%= movie.genres %></p>
+<p>Length: (in minutes): <%= movie.runtime %></p>
+<p>Year of release: <%= movie.release %></p>
+<p>Plot Summary: <%= movie.summary %></p>
+<p>Price: <%= movie.price %></p>
 
 <p>Trailer:</p>
+<iframe
+      width="560"
+      height="315"
+      src="<%= movie.trailer %>"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
 <p>Date added</p>
 <p>Last edited</p>
 
