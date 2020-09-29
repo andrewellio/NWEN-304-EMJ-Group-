@@ -1,20 +1,38 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
-<p>This is what is known as the Movie page (Hello there!)</p>
 
-<p><%= movie.title %></p>
+<head>
+  <title><%= movie.title %></title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+</head>
 
-<p>Poster</p>
-<img src="<%= movie.poster %>" width="30%"/>
-<p>Director: <%= movie.director %></p>
-<p>Cast: <%= movie.actors %></p>
-<p>Genres: <%= movie.genres %></p>
-<p>Length: (in minutes): <%= movie.runtime %></p>
-<p>Year of release: <%= movie.release %></p>
-<p>Plot Summary: <%= movie.summary %></p>
-<p>Price: <%= movie.price %></p>
+<body onload="setup()">
+  <div id="readView" class="container">
+    <h1><%= movie.title %></h1>
 
-<p>Trailer:</p>
-<iframe
+    <img src="<%= movie.poster %>" width="30%" />
+    <p><b>Director:</b> <%= movie.director %></p>
+    <p><b>Cast:</b> <%= movie.actors.join(", ") %></p>
+
+    <p><b>Genres:</b> <%= movie.genres.join(", ") %></p>
+
+    <p>
+      <b>Age Rating: </b>
+
+      <img src="/images/<%= movie.ageRating%>-Rating.png" width="50" alt="" />
+    </p>
+
+    <p><b>Length:</b> <%= movie.runtime %> minutes</p>
+    <p><b>Year of release:</b> <%= movie.release %></p>
+    <p><b>Plot Summary:</b> <%= movie.summary %></p>
+    <p><b>Price:</b> $<%= movie.price %></p>
+
+    <p><b>Trailer:</b></p>
+    <iframe
       width="560"
       height="315"
       src="<%= movie.trailer %>"
@@ -22,10 +40,161 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     ></iframe>
-<p>Date added</p>
-<p>Last edited</p>
+    <br />
+    <br />
 
-<button>Add to Cart (if logged in)</button>
-<button>Log in to add to cart</button>
+    <button id="add-to-cart" onclick="addToCart()">Add to Cart</button> <br />
+    <button id="remove-from-cart" onclick="addToCart()">
+      Remove from Cart
+    </button>
+    <br />
 
-<Button>Edit</Button>
+    <button id="login">Log in to add to cart</button> <br />
+
+    <button
+      id="edit"
+      onclick="toggleEdit()"
+      type="button"
+      class="btn btn-primary"
+    >
+      Edit
+    </button>
+  </div>
+
+  <div id="editView" class="container">
+    <h1>Editing Mode</h1>
+
+    <form action="">
+      <label for="">Title</label>
+      <input type="text" value="<%= movie.title %>" name="" id="" />
+      <br />
+
+      <label for="">Poster link</label>
+      <input
+        type="text"
+        value="<%= movie.poster %>"
+        name=""
+        id=""
+        size="100%"
+      />
+
+      <br />
+      <label for="">Director</label>
+      <input type="text" value="<%= movie.director %>" name="" id="" />
+      <br />
+      <label for="">Actors</label>
+      <input type="text" value="<%= movie.actors.join(", ") %>" name="" id=""
+      size="100%">
+      <br />
+      <label for="">Genres</label>
+      <input type="text" value="<%= movie.genres.join(", ") %>" name="" id="">
+      <br />
+      <label for="">Age Rating</label>
+
+      <select name="rating" id="agerating">
+        <option value="G" id="Grating">G</option>
+        <option value="PG" id="PGrating">PG</option>
+        <option value="M" id="Mrating">M</option>
+        <option value="R13" id="R13rating">R13</option>
+        <option value="R16" id="R16rating">R16</option>
+        <option value="R18" id="R18rating">R18</option>
+      </select>
+      <br />
+      <label for="">Length (in minutes)</label>
+      <input type="number" value="<%= movie.runtime %>" name="" id="" />
+      <br />
+      <label for="">Year of release</label>
+      <input type="number" value="<%= movie.release %>" name="" id="" />
+
+      <br />
+      <label for="">Plot Summary</label>
+      <br />
+      <textarea name="" id="" style="width: 100%" rows="10">
+<%= movie.summary %> </textarea
+      >
+
+      <br />
+      <label for="">Price</label>
+      <input type="number" value="<%= movie.price %>" name="" id="" />
+      <br />
+      <label for="">Trailer link (embed)</label>
+      <input
+        type="text"
+        style="width: 100%"
+        value="<%= movie.trailer %>"
+        name=""
+        id=""
+      />
+    </form>
+    <button
+      id="edit"
+      onclick="finishEditing()"
+      type="button"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </div>
+</body>
+
+<script>
+  var guest = false;
+  var admin = true;
+  var editingMode = false;
+  var inCart = false;
+
+  function toggleEdit() {
+    console.log("toggleEdit");
+    editingMode = !editingMode;
+    editing();
+  }
+
+  function setup() {
+    if (inCart) {
+      document.getElementById("add-to-cart").style.display = "none";
+      document.getElementById("remove-from-cart").style.display = "block";
+    } else {
+      document.getElementById("add-to-cart").style.display = "block";
+      document.getElementById("remove-from-cart").style.display = "none";
+    }
+    document.getElementById("<%= movie.ageRating %>rating").selected = true;
+    document.getElementById("editView").style.display = "none";
+    document.getElementById("readView").style.display = "block";
+    if (guest) {
+      document.getElementById("add-to-cart").style.display = "none";
+      document.getElementById("edit").style.display = "none";
+      document.getElementById("login").style.display = "block";
+    } else {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("add-to-cart").style.display = "block";
+      if (admin) {
+      } else {
+        document.getElementById("edit").style.display = "none";
+      }
+    }
+  }
+
+  function addToCart() {
+    inCart = !inCart;
+    if (inCart) {
+      document.getElementById("add-to-cart").style.display = "none";
+      document.getElementById("remove-from-cart").style.display = "block";
+      alert("Movie has been added to shopping cart");
+    } else {
+      document.getElementById("add-to-cart").style.display = "block";
+      document.getElementById("remove-from-cart").style.display = "none";
+      alert("Movie has been removed from shopping cart");
+    }
+  }
+
+  function editing() {
+    document.getElementById("editView").style.display = "block";
+    document.getElementById("readView").style.display = "none";
+  }
+
+  function finishEditing() {
+    document.getElementById("editView").style.display = "none";
+    document.getElementById("readView").style.display = "block";
+    document.location.reload();
+  }
+</script>
