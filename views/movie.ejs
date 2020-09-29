@@ -1,20 +1,37 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
-<p>This is what is known as the Movie page (Hello there!)</p>
 
-<p><%= movie.title %></p>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
+</head>
 
-<p>Poster</p>
-<img src="<%= movie.poster %>" width="30%"/>
-<p>Director: <%= movie.director %></p>
-<p>Cast: <%= movie.actors %></p>
-<p>Genres: <%= movie.genres %></p>
-<p>Length: (in minutes): <%= movie.runtime %></p>
-<p>Year of release: <%= movie.release %></p>
-<p>Plot Summary: <%= movie.summary %></p>
-<p>Price: <%= movie.price %></p>
+<body onload="setup()">
+  <div class="container">
+    <h1><%= movie.title %></h1>
 
-<p>Trailer:</p>
-<iframe
+    <img src="<%= movie.poster %>" width="30%" />
+    <p><b>Director:</b> <%= movie.director %></p>
+    <p><b>Cast:</b> <%= movie.actors.join(", ") %></p>
+
+    <p><b>Genres:</b> <%= movie.genres.join(", ") %></p>
+
+    <p>
+      <b>Age Rating: </b>
+
+      <img src="/images/<%= movie.ageRating%>-Rating.png" width="50" alt="" />
+    </p>
+
+    <p><b>Length:</b> <%= movie.runtime %> minutes</p>
+    <p><b>Year of release:</b> <%= movie.release %></p>
+    <p><b>Plot Summary:</b> <%= movie.summary %></p>
+    <p><b>Price:</b> $<%= movie.price %></p>
+
+    <p><b>Trailer:</b></p>
+    <iframe
       width="560"
       height="315"
       src="<%= movie.trailer %>"
@@ -22,10 +39,52 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     ></iframe>
-<p>Date added</p>
-<p>Last edited</p>
+    <br />
+    <br />
 
-<button>Add to Cart (if logged in)</button>
-<button>Log in to add to cart</button>
+    <button id="add-to-cart" onclick="addToCart()">Add to Cart</button> <br />
 
-<Button>Edit</Button>
+    <button id="login">Log in to add to cart</button> <br />
+
+    <button
+      id="edit"
+      onclick="toggleEdit()"
+      type="button"
+      class="btn btn-primary"
+    >
+      Edit
+    </button>
+  </div>
+</body>
+
+<script>
+  var guest = false;
+  var admin = true;
+  var editingMode = false;
+  var inCart = false;
+
+  function toggleEdit() {
+    editingMode = !editingMode;
+  }
+
+  function setup() {
+    if (guest) {
+      document.getElementById("add-to-cart").style.display = "none";
+      document.getElementById("edit").style.display = "none";
+      document.getElementById("login").style.display = "block";
+    } else {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("add-to-cart").style.display = "block";
+      if (admin) {
+      } else {
+        document.getElementById("edit").style.display = "none";
+      }
+    }
+  }
+
+  function addToCart() {
+    alert("Movie has been added to shopping cart");
+  }
+
+  function editing() {}
+</script>
