@@ -1,5 +1,9 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
 
+<head>
+  <title>Account</title>
+</head>
+
 <body onload="loadPurchases()">
   <div>
     <h1>My account</h1>
@@ -25,14 +29,17 @@
     <button onClick="passwordFunction()">Want to change password?</button>
     <br />
     <div id="changePassword" style="display: none">
-      <div>
+      <form>
         <label for="">Current Password</label>
         <input type="text" required />
+        <hr />
         <label for="">New Password</label>
         <input type="text" required />
+        <hr />
         <label for="">Re-type new password</label>
         <input type="text" required />
-      </div>
+        <hr />
+      </form>
       <p>Forgot your password?</p>
       <button>Change password</button>
     </div>
