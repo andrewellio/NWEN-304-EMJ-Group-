@@ -66,7 +66,12 @@
 
     <form action="">
       <label for="">Title</label>
-      <input type="text" value="<%= movie.title %>" name="" id="" />
+      <input
+        type="text"
+        value="<%= movie.title %>"
+        name="newTitle"
+        id="newTitle"
+      />
       <br />
 
       <label for="">Poster link</label>
@@ -74,20 +79,26 @@
         type="text"
         value="<%= movie.poster %>"
         name=""
-        id=""
+        id="newPoster"
         size="100%"
       />
 
       <br />
-      <label for="">Director</label>
-      <input type="text" value="<%= movie.director %>" name="" id="" />
+      <label for="">Director(s)</label>
+      <input
+        type="text"
+        value="<%= movie.director %>"
+        name="newDirector"
+        id="newDirector"
+      />
       <br />
       <label for="">Actors</label>
-      <input type="text" value="<%= movie.actors.join(", ") %>" name="" id=""
-      size="100%">
+      <input type="text" value="<%= movie.actors.join(", ") %>" name=""
+      id="newActors" size="100%">
       <br />
       <label for="">Genres</label>
-      <input type="text" value="<%= movie.genres.join(", ") %>" name="" id="">
+      <input type="text" value="<%= movie.genres.join(", ") %>" name=""
+      id="newGenres">
       <br />
       <label for="">Age Rating</label>
 
@@ -101,21 +112,26 @@
       </select>
       <br />
       <label for="">Length (in minutes)</label>
-      <input type="number" value="<%= movie.runtime %>" name="" id="" />
+      <input
+        type="number"
+        value="<%= movie.runtime %>"
+        name=""
+        id="newLength"
+      />
       <br />
       <label for="">Year of release</label>
-      <input type="number" value="<%= movie.release %>" name="" id="" />
+      <input type="number" value="<%= movie.release %>" name="" id="newYear" />
 
       <br />
       <label for="">Plot Summary</label>
       <br />
-      <textarea name="" id="" style="width: 100%" rows="10">
+      <textarea name="" id="newSummary" style="width: 100%" rows="10">
 <%= movie.summary %> </textarea
       >
 
       <br />
       <label for="">Price</label>
-      <input type="number" value="<%= movie.price %>" name="" id="" />
+      <input type="number" value="<%= movie.price %>" name="" id="newPrice" />
       <br />
       <label for="">Trailer link (embed)</label>
       <input
@@ -123,7 +139,7 @@
         style="width: 100%"
         value="<%= movie.trailer %>"
         name=""
-        id=""
+        id="newTrailer"
       />
     </form>
     <button
@@ -195,6 +211,21 @@
   function finishEditing() {
     document.getElementById("editView").style.display = "none";
     document.getElementById("readView").style.display = "block";
-    document.location.reload();
+
+    var updatedTitle = document.getElementById("newTitle").value;
+    var updatedDirector = document
+      .getElementById("newDirector")
+      .value.split(",");
+    var updatedGenres = document.getElementById("newGenres").value.split(",");
+    var updatedActors = document.getElementById("newActors").value.split(",");
+    var updatedLength = document.getElementById("newLength").value;
+    var updatedYear = document.getElementById("newYear").value;
+    var updatedSummary = document.getElementById("newSummary").value;
+    var updatedRating = document.getElementById("agerating").value;
+    var updatedPrice = document.getElementById("newPrice").value;
+    var updatedPoster = document.getElementById("newPoster").value;
+    var updatedTrailer = document.getElementById("newTrailer").value;
+
+    //document.location.reload();
   }
 </script>

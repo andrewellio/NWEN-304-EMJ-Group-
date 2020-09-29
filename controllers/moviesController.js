@@ -5,7 +5,7 @@ const Movie = require("../models/movie");
 movie1 = new Movie(
   1,
   "Deadpool",
-  "Tim Miller",
+  ["Tim Miller"],
   ["Action", "Adventure", "Comedy"],
   ["Ryan Reynolds", "Morena Baccarin", "T.J. Miller"],
   108,
@@ -20,7 +20,7 @@ movie1 = new Movie(
 movie2 = new Movie(
   2,
   "Deadpool 2",
-  "David Leitch",
+  ["David Leitch"],
   ["Action", "Adventure", "Comedy"],
   ["Ryan Reynolds", "Josh Brolin", "Morena Baccarin"],
   119,
@@ -34,7 +34,7 @@ movie2 = new Movie(
 
 movie3 = new Movie(
   3,
-  "Arrival",
+  ["Arrival"],
   "Denis Villeneuve",
   ["Drama", "Mystery", "Sci-Fi"],
   [
@@ -66,6 +66,5 @@ exports.getDynamicMovieDetails = (req, res, next) => {
 exports.getMoviesPage = (req, res, next) => {
   //movieList = Movie.all();
   movieList = Movie.allByTitle();
-  console.log(movieList);
   res.render("movieslist", { movies: movieList });
 };
