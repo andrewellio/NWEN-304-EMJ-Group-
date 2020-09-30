@@ -4,7 +4,7 @@
 <!--Template Form from https://www.w3schools.com/howto/howto_css_register_form.asp-->
 <!--Password Complexity JS from https://www.geeksforgeeks.org/validate-a-password-using-html-and-javascript/-->
 
-<form action="" onsubmit="add_user()">
+<form onsubmit="validate_password(this)">
   <!--name, usr and psw parameters must be removed from URL (i.e should use a POST)-->
   <div class="container">
     <h1>Register</h1>
@@ -66,17 +66,36 @@
       </style>
 
 <script>
-  function validate_password() { 
-        var str = 
-            document.getElementById("psw").value; 
-        if (!(str.match(/[a-z]/g) && str.match( 
-                /[A-Z]/g) && str.match( 
-                /[0-9]/g) && str.match( 
-                /[^a-zA-Z\d]/g) && str.length >= 8)) 
-        alert("Your password must contain 1 lowercase, uppercase, digit, special character and must also be at least 8 characters long.");
+  function validate_password(form) { 
+    var str = 
+        document.getElementById("psw").value; 
+    if (!(str.match(/[a-z]/g) && str.match( 
+            /[A-Z]/g) && str.match( 
+             /[0-9]/g) && str.match( 
+             /[^a-zA-Z\d]/g) && str.length >= 8)) 
+      alert("Your password must contain 1 lowercase, uppercase, digit, special character and must also be at least 8 characters long.");
+    else
+      add_user()
     } 
+
   function add_user() {
-console.print("hi");
+alert("1");
+const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb+srv://webapp:m4rs4f031998@moviedatabase.pwl6x.azure.mongodb.net/MovieDB?retryWrites=true&w=majority";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+
+  var dbo = db.db("MovieDB");
+  var myobj = { name: "hi"};
+  dbo.collection("Users").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    db.close();
+  });
+});
+alert("2");
+//alert("Your account has been created, you can now login!");  
+    //form.action = "login"
   }
 </script>
 
