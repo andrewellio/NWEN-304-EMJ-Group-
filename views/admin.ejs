@@ -113,4 +113,30 @@
       <button type="submit" class="registerbtn">Upload</button>
     </div>
   </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>URL</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < movies.length; i++) {%>
+      <tr style="padding: 15px">
+        <td>
+          <a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a>
+        </td>
+        <td><%= movies[i].id %></td>
+        <td><%= movies[i].title.join(", ") %></td>
+        <td><a href="/movieslist/<%= movies[i].id %>">/movieslist/<%= movies[i].id %></a> %></td>
+        <td><%= movies[i].runtime %></td>
+        <td><%= movies[i].release %></td>
+        <td>$<%= movies[i].price %></td>
+        <td><%= movies[i].ageRating %></td>
+      </tr>
+      <% } %>
+    </tbody>
 </body>
