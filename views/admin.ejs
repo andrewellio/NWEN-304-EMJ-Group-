@@ -2,141 +2,163 @@
 
 <head>
   <title>Admin</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous"
+  />
 </head>
 
 <body>
-  <p>This is what is known as the admin page (Hello there!)</p>
+  
+    <p>This is what is known as the admin page (Hello there!)</p>
 
-  <form>
-    <div class="container">
-      <h1>Upload</h1>
-      <p>To upload a movie, please fill in the form below.</p>
+    <form>
+      <div class="container">
+        <h1>Upload</h1>
+        <p>To upload a movie, please fill in the form below.</p>
 
-      <hr />
-      <label for="title"><b>Title</b></label>
-      <input
-        type="text"
-        placeholder="Enter movie title"
-        name="title"
-        id="title"
-        required
-      />
-      <br />
+        <hr />
+        <label for="title"><b>Title</b></label>
+        <input
+          type="text"
+          placeholder="Enter movie title"
+          name="title"
+          id="title"
+          required
+        />
 
-      <label for="directors"><b>Director(s)</b></label>
-      <input
-        type="text"
-        placeholder="Enter name of director(s)"
-        name="directors"
-        id="directors"
-        required
-      />
-      <br />
+        <br />
+        <label for="">Poster link</label>
+        <input type="text" name="" id="poster" size="100%" />
+        <br />
 
-      <label for="cast"><b>Cast</b></label>
+        <label for="directors"><b>Director(s)</b></label>
+        <input
+          type="text"
+          placeholder="Enter name of director (if there's more than one, separate using commas)"
+          name="directors"
+          id="directors"
+          required
+        />
+        <br />
 
-      <input
-        type="text"
-        placeholder="Enter cast"
-        name="cast"
-        id="cast"
-        required
-      />
-      <br />
+        <label for="cast"><b>Actors</b></label>
 
-      <label for="genres"><b>Genres</b></label>
+        <input
+          type="text"
+          placeholder="Enter actors (separate actor names with commas)"
+          name="actors"
+          id="actors"
+          size="100%"
+          required
+        />
+        <br />
 
-      <input
-        type="text"
-        placeholder="Enter genres"
-        name="genres"
-        id="genres"
-        required
-      />
-      <br />
-      <label><b>Runtime (in minutes)</b></label>
-      <input
-        type="number"
-        placeholder="Enter runtime (minutes)"
-        name="runtime"
-        id="runtime"
-        required
-      />
-      <br />
-      <label><b>Year of release:</b></label>
-      <input
-        type="number"
-        placeholder="Enter year of release"
-        name="year"
-        id="year"
-        required
-      />
-      <br />
-      <label><b>Plot Summary:</b></label>
-      <input
-        type="string"
-        placeholder="Enter summary"
-        name="summary"
-        id="summary"
-        required
-      />
-      <br />
-      <label><b>Age Rating:</b></label>
-      <input
-        type="string"
-        placeholder="Enter age rating"
-        name="ageRating"
-        id="ageRating"
-      />
-      <br />
-      <label><b>Price:</b></label>
-      <input
-        type="number"
-        placeholder="Enter price"
-        name="price"
-        id="price"
-        required
-      />
-      <br />
+        <label for="genres"><b>Genres</b></label>
 
-      <label><b>Trailer:</b></label>
-      <input
-        type="genres"
-        placeholder="Enter youtube link (embed)"
-        name="trailer"
-        id="trailer"
-      />
-      <br />
+        <input
+          type="text"
+          placeholder="Enter genres"
+          name="genres"
+          id="genres"
+          required
+        />
 
-      <hr />
+        <br />
+        <label><b>Runtime (in minutes)</b></label>
+        <input
+          type="number"
+          placeholder="Enter runtime (minutes)"
+          name="runtime"
+          id="runtime"
+          required
+        />
+        <br />
+        <label><b>Year of release:</b></label>
+        <input
+          type="number"
+          placeholder="Enter year of release"
+          name="year"
+          id="year"
+          required
+        />
 
-      <button type="submit" class="registerbtn">Upload</button>
-    </div>
-  </form>
+        <br />
+        <label><b>Plot Summary:</b></label>
+        <textarea
+          type="text"
+          placeholder="Enter summary"
+          name="summary"
+          id="summary"
+          style="width: 100%"
+          rows="10"
+          required
+        ></textarea>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>URL</th>
-        <th>Operations</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(var i = 0; i < movies.length; i++) {%>
-      <tr style="padding: 15px">
-        <td>
-          <a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a>
-        </td>
-        <td><%= movies[i].id %></td>
-        <td><%= movies[i].title.join(", ") %></td>
-        <td><a href="/movieslist/<%= movies[i].id %>">/movieslist/<%= movies[i].id %></a> %></td>
-        <td><%= movies[i].runtime %></td>
-        <td><%= movies[i].release %></td>
-        <td>$<%= movies[i].price %></td>
-        <td><%= movies[i].ageRating %></td>
-      </tr>
-      <% } %>
-    </tbody>
+        <br />
+        <label><b>Age Rating:</b></label>
+
+        <select name="rating" id="ageRating">
+          <option value="G" id="Grating">G</option>
+          <option value="PG" id="PGrating">PG</option>
+          <option value="M" id="Mrating">M</option>
+          <option value="R13" id="R13rating">R13</option>
+          <option value="R16" id="R16rating">R16</option>
+          <option value="R18" id="R18rating">R18</option>
+        </select>
+        <br />
+
+        <label><b>Price:</b></label>
+        <input
+          type="number"
+          placeholder="Enter price"
+          name="price"
+          id="price"
+          required
+        />
+        <br />
+
+        <label><b>Trailer:</b></label>
+        <input
+          type="text"
+          placeholder="Enter youtube link (embed)"
+          name="trailer"
+          id="trailer"
+          style="width: 100%"
+        />
+        <br />
+
+        <hr />
+
+        <!-- <button onclick="addMovie()" //type="submit" //class="registerbtn"
+        >
+          Upload
+        </button> -->
+        <button type="button" onclick="addMovie()">
+          Upload
+        </button>
+
+    </form>
+  </div>
 </body>
+
+<script>
+  function addMovie() {
+    var newTitle = document.getElementById("title").value;
+    var newDirectors = document.getElementById("directors").value.split(",");
+    var newGenres = document.getElementById("genres").value.split(",");
+    var newActors = document.getElementById("actors").value.split(",");
+    var newLength = document.getElementById("runtime").value;
+    var newYear = document.getElementById("year").value;
+    var newSummary = document.getElementById("summary").value;
+    var newRating = document.getElementById("ageRating").value;
+    var newPrice = document.getElementById("price").value;
+    var newPoster = document.getElementById("poster").value;
+    var newTrailer = document.getElementById("trailer").value;
+  
+
+    //document.location.reload();
+  }
+</script>
