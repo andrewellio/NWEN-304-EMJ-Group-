@@ -1,26 +1,33 @@
 <%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
-<p>This is what is known as the search page (Hello there!)</p>
 
-<input
-  type="text"
-  id="myInput"
-  onkeyup="search()"
-  placeholder="Search for movies, directors and actors.."
-/>
+<head>
+  <title>Search</title>
+</head>
 
-<p>Searches input through titles, directors and actors</p>
+<body>
+  <p>This is what is known as the search page (Hello there!)</p>
 
-<button>Press search</button>
+  <input
+    type="text"
+    id="myInput"
+    onkeyup="search()"
+    placeholder="Search for movies, directors and actors.."
+  />
 
-<div id="search" style="display: none">
-  <p>Table after search</p>
-  <h2>Results</h2>
-  <div id="results">
-    <p id="example">This is example</p>
+  <p>Searches input through titles, directors and actors</p>
+
+  <button>Press search</button>
+
+  <div id="search" style="display: none">
+    <p>Table after search</p>
+    <h2>Results</h2>
+    <div id="results">
+      <p id="example">This is example</p>
+    </div>
+
+    <div id="no-results"><p>No results</p></div>
   </div>
-
-  <div id="no-results"><p>No results</p></div>
-</div>
+</body>
 
 <style>
   #myInput {

@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var controller = require("../controllers/moviesController.js");
 
 /* GET index page. */
 router.get("/", function (req, res, next) {
@@ -12,14 +13,15 @@ router.get("/home", function (req, res, next) {
 });
 
 /* GET movies page. */
-router.get("/movieslist", function (req, res, next) {
-  res.render("movieslist", { title: "Express" });
-});
+router.get("/movieslist", controller.getMoviesPage);
 
 /* GET movie page. */
 router.get("/movie", function (req, res, next) {
-  res.render("movie", { title: "Express" });
+  res.render("movie", { title: "Express"});
 });
+
+/* GET dynamic movie page. */
+router.get("/movieslist/:id", controller.getDynamicMovieDetails);
 
 /* GET movie page. */
 router.get("/movie-test", function (req, res, next) {
