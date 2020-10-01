@@ -34,8 +34,8 @@ movie2 = new Movie(
 
 movie3 = new Movie(
   3,
-  ["Arrival"],
-  "Denis Villeneuve",
+  "Arrival",
+  ["Denis Villeneuve"],
   ["Drama", "Mystery", "Sci-Fi"],
   [
     "Amy Adams",
