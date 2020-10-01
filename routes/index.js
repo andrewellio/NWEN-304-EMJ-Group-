@@ -51,6 +51,39 @@ router.get("/register", function (req, res, next) {
   res.render("register", { title: "Express" });
 });
 
+//Db Connection Start
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb+srv://webapp:m4rs4f031998@moviedatabase.pwl6x.azure.mongodb.net/MovieDB?retryWrites=true&w=majority", {useNewUrlParser: true});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {console.log("mongoSB connection success - active")
+  // we're connected!
+  
+});
+
+const userSchema = new mongoose.Schema({
+    name :String,
+    email :String,
+    usr :String,
+    psw :String
+});
+
+const User = mongoose.model('User', userSchema);
+
+router.post("/register", function (req, res, next){
+  const data = new User ({
+    name: req.body.name,
+    email: req.body.email,
+    usr: req.body.usr,
+    psw: req.body.psw
+  });
+  data.save();
+  //console.log(req.body);
+});
+
+
+
 /* GET admin page. */
 router.get("/admin", function (req, res, next) {
   res.render("admin", { title: "Express" });
