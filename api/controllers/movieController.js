@@ -1,29 +1,27 @@
-const express = require('express');
-const router = express.Router();
 const Movie = require ('../models/Movie.js')
 
 //Get all movies
-router.get('/', async (req, res) => {
+exports.getAllMovies = async (req, res) => {
   try {
     const movies = await Movie.find();
     res.json(movies);
   } catch(err) {
     res.json({ message: err });
   }
-});
+};
 
 //Get a movie
-router.get('/:id', async (req, res) => {
+exports.getMovieById = async (req, res) => {
   try {
-    const movie =  await Movie.findById(req.params.id);
+    const movie = await Movie.findById(req.params.id);
     res.json(movie);
   } catch(err) {
     res.json({ message: err });
   }
-});
+};
 
 //Add a movie
-router.post('/', async (req, res) => {
+exports.addMovie = async (req, res) => {
   const movie = new Movie({
     id: req.body.id,
     title: req.body.title,
@@ -45,21 +43,27 @@ router.post('/', async (req, res) => {
   } catch(err) {
     res.json({ message: err });
   }
-});
+};
 
 //Delete a movie
-router.delete('/:id', async (req, res) => {
+exports.deleteMovie = async (req, res) => {
   try {
     const removedMovie = await Movie.remove({_id: req.params.id});
     res.json(removedMovie);
   } catch(err) {
     res.json({ message: err });
+  } 
+};
+
+//Edit a movie
+exports.editMovie = async (req, res) => {
+  try {
+    const updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {title: req.body.title} }
+    );
+    res.json(updatedMovie);
+  } catch {
+    res.json({ message: err })
   }
-  
-})
-
-
-
-
-
-module.exports = router;
+};
