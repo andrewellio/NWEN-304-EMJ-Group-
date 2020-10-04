@@ -34,8 +34,8 @@ movie2 = new Movie(
 
 movie3 = new Movie(
   3,
-  ["Arrival"],
-  "Denis Villeneuve",
+  "Arrival",
+  ["Denis Villeneuve"],
   ["Drama", "Mystery", "Sci-Fi"],
   [
     "Amy Adams",
@@ -67,4 +67,16 @@ exports.getMoviesPage = (req, res, next) => {
   //movieList = Movie.all();
   movieList = Movie.allByTitle();
   res.render("movieslist", { movies: movieList });
+};
+
+exports.getSearchPage = (req, res, next) => {
+  //movieList = Movie.all();
+  searchList = Movie.allByTitle();
+  res.render("search", { movies: searchList });
+};
+
+exports.getHomePage = (req, res, next) => {
+  //movieList = Movie.all();
+  featuredMovie = movie3;
+  res.render("home", { movie: featuredMovie });
 };

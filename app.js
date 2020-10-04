@@ -30,7 +30,7 @@ app.use("/shoppingcart", indexRouter);
 app.use("/myaccount", indexRouter);
 app.use("/login", indexRouter);
 app.use("/register", indexRouter);
-app.use("/admin", indexRouter);
+app.use("/upload", indexRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
