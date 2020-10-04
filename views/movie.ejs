@@ -150,6 +150,15 @@
     >
       Submit
     </button>
+
+    <button
+      id="delete"
+      onclick="deletePost()"
+      type="button"
+      class="btn btn-danger"
+    >
+      Delete
+    </button>
   </div>
 </body>
 
@@ -208,6 +217,9 @@
     document.getElementById("readView").style.display = "none";
   }
 
+  function deletePost() {
+    alert("Delete post");
+  }
   function finishEditing() {
     document.getElementById("editView").style.display = "none";
     document.getElementById("readView").style.display = "block";

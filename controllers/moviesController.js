@@ -68,3 +68,15 @@ exports.getMoviesPage = (req, res, next) => {
   movieList = Movie.allByTitle();
   res.render("movieslist", { movies: movieList });
 };
+
+exports.getSearchPage = (req, res, next) => {
+  //movieList = Movie.all();
+  searchList = Movie.allByTitle();
+  res.render("search", { movies: searchList });
+};
+
+exports.getHomePage = (req, res, next) => {
+  //movieList = Movie.all();
+  featuredMovie = movie3;
+  res.render("home", { movie: featuredMovie });
+};

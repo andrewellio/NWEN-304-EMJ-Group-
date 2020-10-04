@@ -5,8 +5,7 @@
 </head>
 
 <body>
-  <p>This is what is known as the search page (Hello there!)</p>
-
+  <h1>Search</h1>
   <input
     type="text"
     id="myInput"
@@ -16,16 +15,24 @@
 
   <p>Searches input through titles, directors and actors</p>
 
-  <button>Press search</button>
-
   <div id="search" style="display: none">
-    <p>Table after search</p>
     <h2>Results</h2>
     <div id="results">
-      <p id="example">This is example</p>
+      <p id="example"></p>
     </div>
 
-    <div id="no-results"><p>No results</p></div>
+    <ul id="searchMovies">
+      <% for(var i = 0; i < movies.length; i++) {%>
+
+      <li>
+        <a href="/movieslist/<%= movies[i].id %>"
+          ><%= movies[i].title %> | <%= movies[i].director %> | <%=
+          movies[i].actors.join(", ") %></a
+        >
+      </li>
+
+      <% } %>
+    </ul>
   </div>
 </body>
 
@@ -41,14 +48,14 @@
     margin-bottom: 12px; /* Add some space below the input */
   }
 
-  #myUL {
+  #searchMovies {
     /* Remove default list styling */
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
 
-  #myUL li a {
+  #searchMovies li a {
     border: 1px solid #ddd; /* Add a border to all links */
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6; /* Grey background color */
@@ -59,25 +66,57 @@
     display: block; /* Make it into a block element to fill the whole list */
   }
 
-  #myUL li a:hover:not(.header) {
+  #searchMovies li a:hover:not(.header) {
     background-color: #eee; /* Add a hover effect to all links, except for headers */
   }
 </style>
 
 <script>
   var array = ["movie"];
+
+  // function search() {
+  //   var x = document.getElementById("search");
+
+  //   x.style.display = "block";
+
+  //   if (array.length > 0) {
+  //     document.getElementById("results").style.display = "block";
+  //     document.getElementById("no-results").style.display = "none";
+  //     document.getElementById("example").innerHTML =
+  //       array.length + " results found";
+  //   } else {
+  //     document.getElementById("results").style.display = "none";
+  //     document.getElementById("no-results").style.display = "block";
+  //   }
+  // }
+
   function search() {
+    var num = 0;
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+
+    console.log(document.getElementById("search"));
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("searchMovies");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+        num++;
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    document.getElementById("example").innerHTML = num + " results found";
+
     var x = document.getElementById("search");
 
-    x.style.display = "block";
-    if (array.length > 0) {
-      document.getElementById("results").style.display = "block";
-      document.getElementById("no-results").style.display = "none";
-      document.getElementById("example").innerHTML =
-        array.length + " results found";
+    if (document.getElementById("myInput").value == "") {
+      x.style.display = "none";
     } else {
-      document.getElementById("results").style.display = "none";
-      document.getElementById("no-results").style.display = "block";
+      x.style.display = "block";
     }
   }
 </script>
