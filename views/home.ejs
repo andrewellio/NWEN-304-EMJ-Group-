@@ -7,9 +7,13 @@
 <body>
   <p>This is what is known as the Home page (Hello there!)</p>
 
-  <p>Newest movie</p>
+  <h1>Latest movie</h1>
+  <a href="/movieslist/<%= movie.id %>">
+    <h2><%=movie.title %></h2>
 
-  <p>Link</p>
+    <img src="<%= movie.poster %>" style="width: 50%" alt="" />
+  </a>
+
   <!-- 
 
     
