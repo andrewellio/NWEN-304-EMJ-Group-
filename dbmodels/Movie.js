@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MovieSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   title: {
     type: String,
     required: true,
@@ -52,4 +48,4 @@ const MovieSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("RESTmovie", MovieSchema);
+module.exports = mongoose.model("Movie", MovieSchema);

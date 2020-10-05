@@ -97,4 +97,7 @@ router.get("/upload", function (req, res, next) {
   res.render("upload", { title: "Express" });
 });
 
+/* POST movie from upload page. */
+router.post("/upload", controller.addMovie);
+
 module.exports = router;

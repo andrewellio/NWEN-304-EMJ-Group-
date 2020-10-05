@@ -1,6 +1,9 @@
 const Movie = require("../models/movie");
+const dbMovie = require("../dbmodels/Movie");
 
 /*Placeholder movies for testing without mongodb*/
+
+Movie.loadDB();
 
 movie1 = new Movie(
   1,
@@ -57,26 +60,69 @@ movie1.add();
 movie2.add();
 movie3.add();
 
-exports.getDynamicMovieDetails = (req, res, next) => {
+exports.getDynamicMovieDetails = async (req, res, next) => {
+  Movie.loadDB();
   id = req.params.id;
   mov = Movie.search(id);
   res.render("movie", { pageTitle: mov.title, movie: mov });
 };
 
-exports.getMoviesPage = (req, res, next) => {
+exports.getMoviesPage = async (req, res, next) => {
   //movieList = Movie.all();
   movieList = Movie.allByTitle();
   res.render("movieslist", { movies: movieList });
 };
 
-exports.getSearchPage = (req, res, next) => {
+exports.getSearchPage = async (req, res, next) => {
   //movieList = Movie.all();
   searchList = Movie.allByTitle();
   res.render("search", { movies: searchList });
 };
 
-exports.getHomePage = (req, res, next) => {
+exports.getHomePage = async (req, res, next) => {
   //movieList = Movie.all();
   featuredMovie = movie3;
   res.render("home", { movie: featuredMovie });
+};
+
+exports.addMovie = async (req, res, next) => {
+  
+  const dbmovie = new dbMovie({
+    title: req.body.title,
+    director: req.body.directors,
+    genres: req.body.genres,
+    actors: req.body.actors,
+    runtime: req.body.runtime,
+    release: req.body.year,
+    summary: req.body.summary,
+    ageRating: req.body.rating,
+    price: req.body.price,
+    poster: req.body.poster,
+    trailer: req.body.trailer
+  });
+  
+  try{
+    const savedMovie = await dbmovie.save();
+
+    uploadedMovie = new Movie(
+      savedMovie._id,
+      savedMovie.title,
+      savedMovie.director,
+      savedMovie.genres,
+      savedMovie.actors,
+      savedMovie.runtime,
+      savedMovie.release,
+      savedMovie.summary,
+      savedMovie.ageRating,
+      savedMovie.price,
+      savedMovie.poster,
+      savedMovie.trailer
+    );
+    uploadedMovie.add();
+
+    console.log('Added movie: ' + savedMovie.title);
+    res.redirect('upload');
+  } catch(err) {
+    console.log('error');
+  }
 };
