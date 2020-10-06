@@ -14,7 +14,7 @@
   
     <p>This is what is known as the upload page (Hello there!)</p>
 
-    <form>
+    <form method="POST" action="/upload">
       <div class="container">
         <h1>Upload</h1>
         <p>To upload a movie, please fill in the form below.</p>
@@ -31,7 +31,7 @@
 
         <br />
         <label for="">Poster link</label>
-        <input type="text" name="" id="poster" size="100%" />
+        <input type="text" name="poster" id="poster" size="100%" />
         <br />
 
         <label for="directors"><b>Director(s)</b></label>
@@ -136,7 +136,7 @@
         >
           Upload
         </button> -->
-        <button type="button" onclick="addMovie()">
+        <button onclick="addMovie()" type="submit" class="registerbtn">
           Upload
         </button>
 
