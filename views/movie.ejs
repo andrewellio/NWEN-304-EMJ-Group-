@@ -64,7 +64,7 @@
   <div id="editView" class="container">
     <h1>Editing Mode</h1>
 
-    <form action="">
+    <form method="POST" action="/movieslist/<%= movie.id %>">
       <label for="">Title</label>
       <input
         type="text"
@@ -78,7 +78,7 @@
       <input
         type="text"
         value="<%= movie.poster %>"
-        name=""
+        name="newPoster"
         id="newPoster"
         size="100%"
       />
@@ -88,21 +88,21 @@
       <input
         type="text"
         value="<%= movie.director %>"
-        name="newDirector"
-        id="newDirector"
+        name="newDirectors"
+        id="newDirectors"
       />
       <br />
       <label for="">Actors</label>
-      <input type="text" value="<%= movie.actors.join(", ") %>" name=""
+      <input type="text" value="<%= movie.actors.join(", ") %>" name="newActors"
       id="newActors" size="100%">
       <br />
       <label for="">Genres</label>
-      <input type="text" value="<%= movie.genres.join(", ") %>" name=""
+      <input type="text" value="<%= movie.genres.join(", ") %>" name="newGenres"
       id="newGenres">
       <br />
       <label for="">Age Rating</label>
 
-      <select name="rating" id="agerating">
+      <select name="newRating" id="newRating">
         <option value="G" id="Grating">G</option>
         <option value="PG" id="PGrating">PG</option>
         <option value="M" id="Mrating">M</option>
@@ -115,50 +115,52 @@
       <input
         type="number"
         value="<%= movie.runtime %>"
-        name=""
-        id="newLength"
+        name="newRuntime"
+        id="newRuntime"
       />
       <br />
       <label for="">Year of release</label>
-      <input type="number" value="<%= movie.release %>" name="" id="newYear" />
+      <input type="number" value="<%= movie.release %>" name="newYear" id="newYear" />
 
       <br />
       <label for="">Plot Summary</label>
       <br />
-      <textarea name="" id="newSummary" style="width: 100%" rows="10">
+      <textarea name="newSummary" id="newSummary" style="width: 100%" rows="10">
 <%= movie.summary %> </textarea
       >
 
       <br />
       <label for="">Price</label>
-      <input type="number" value="<%= movie.price %>" name="" id="newPrice" />
+      <input type="number" value="<%= movie.price %>" name="newPrice" id="newPrice" />
       <br />
       <label for="">Trailer link (embed)</label>
       <input
         type="text"
         style="width: 100%"
         value="<%= movie.trailer %>"
-        name=""
+        name="newTrailer"
         id="newTrailer"
       />
-    </form>
+    
     <button
       id="edit"
       onclick="finishEditing()"
-      type="button"
+      type="submit"
       class="btn btn-primary"
     >
       Submit
     </button>
-
+    </form>
+    <form method="POST" action="/movieslist/delete/<%= movie.id %>">
     <button
       id="delete"
       onclick="deletePost()"
-      type="button"
+      type="submit"
       class="btn btn-danger"
     >
       Delete
     </button>
+    </form>
   </div>
 </body>
 
