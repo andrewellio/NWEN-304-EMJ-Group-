@@ -37,7 +37,7 @@ exports.addMovie = async (req, res) => {
     trailer: req.body.trailer
   });
   
-  try{
+  try {
     const savedMovie = await movie.save();
     res.json(savedMovie);
   } catch(err) {
@@ -55,15 +55,84 @@ exports.deleteMovie = async (req, res) => {
   } 
 };
 
-//Edit a movie
+//Edit a movie NEED TO IMPLEMENT CHECKING FOR ERRORS
 exports.editMovie = async (req, res) => {
-  try {
-    const updatedMovie = await Movie.updateOne(
+  if(req.body.title !== undefined) {
+    var updatedMovie = await Movie.updateOne(
       { _id: req.params.id }, 
       { $set: {title: req.body.title} }
     );
-    res.json(updatedMovie);
-  } catch {
-    res.json({ message: err })
+  } 
+
+  if(req.body.director !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {director: req.body.director} }
+    );
   }
+
+  if(req.body.genres !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {genres: req.body.genres} }
+    );
+  }
+  
+  if(req.body.actors !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {actors: req.body.actors} }
+    );
+  }
+
+  if(req.body.runtime !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {runtime: req.body.runtime} }
+    );
+  }
+
+  if(req.body.release !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {release: req.body.release} }
+    );
+  }
+
+  if(req.body.summary !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {summary: req.body.summary} }
+    );
+  }
+
+  if(req.body.ageRating !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {ageRating: req.body.ageRating} }
+    );
+  }
+
+  if(req.body.price !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {price: req.body.price} }
+    );
+  }
+
+  if(req.body.poster !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {poster: req.body.poster} }
+    );
+  }
+
+  if(req.body.trailer !== undefined) {
+    var updatedMovie = await Movie.updateOne(
+      { _id: req.params.id }, 
+      { $set: {trailer: req.body.trailer} }
+    );
+  }
+  const movie = await Movie.findById(req.params.id);
+  res.json(movie);
 };
