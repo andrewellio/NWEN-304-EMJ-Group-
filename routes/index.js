@@ -23,6 +23,12 @@ router.get("/movie", function (req, res, next) {
 /* GET dynamic movie page. */
 router.get("/movieslist/:id", controller.getDynamicMovieDetails);
 
+/* PATCH movie */
+router.post("/movieslist/:id", controller.editMovie);
+
+/* Delete movie*/
+router.post("/movieslist/delete/:id", controller.removeMovie);
+
 /* GET movie page. */
 router.get("/movie-test", function (req, res, next) {
   res.render("movie-test", { title: "Express" });

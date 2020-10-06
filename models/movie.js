@@ -1,6 +1,6 @@
 const dbMovie = require("../dbmodels/Movie");
 
-const movies = [];
+var movies = [];
 
 module.exports = class Movie {
   constructor(
@@ -96,4 +96,18 @@ module.exports = class Movie {
   order() {
     movies.sort();
   }
+
+  static delete(id) {
+    const toDelete = this.search(id);
+    var i = 0;
+		while(i < movies.length) {
+			if(movies[i] == toDelete){
+				movies.splice(i, 1);
+			} else {
+				i = i + 1;
+			}
+		}
+  }
 };
+
+
