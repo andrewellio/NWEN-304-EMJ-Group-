@@ -20,7 +20,8 @@ exports.getSearchPage = (req, res, next) => {
 };
 
 exports.getHomePage = (req, res, next) => {
-  featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
+  featuredMovie = Movie.getLatest();
+  //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
   res.render("home", { movie: featuredMovie });
 };
 
@@ -36,12 +37,12 @@ exports.addMovie = async (req, res, next) => {
     ageRating: req.body.rating,
     price: req.body.price,
     poster: req.body.poster,
-    trailer: req.body.trailer
+    trailer: req.body.trailer,
   });
-  
-  try{
+
+  try {
     const savedMovie = await dbmovie.save();
-    
+
     uploadedMovie = new Movie(
       savedMovie._id,
       savedMovie.title,
@@ -58,18 +59,17 @@ exports.addMovie = async (req, res, next) => {
     );
 
     uploadedMovie.add();
-    res.redirect('/upload');
-    console.log('Added: ' + savedMovie.title);
-
-  } catch(err) {
-    console.log('error');
+    res.redirect("/upload");
+    console.log("Added: " + savedMovie.title);
+  } catch (err) {
+    console.log("error");
   }
 };
 
 exports.removeMovie = async (req, res, next) => {
-  const removedMovie = await dbMovie.deleteOne({_id: req.params.id});
+  const removedMovie = await dbMovie.deleteOne({ _id: req.params.id });
   Movie.delete(req.params.id);
-  res.redirect('/movieslist');
+  res.redirect("/movieslist");
   console.log("Removed: " + req.params.id);
 };
 
@@ -78,10 +78,11 @@ exports.editMovie = async (req, res, next) => {
 
   //DB update
   await dbMovie.updateOne(
-    { _id: req.params.id }, 
-      { $set: {
+    { _id: req.params.id },
+    {
+      $set: {
         title: req.body.newTitle,
-        director:req.body.newDirectors,
+        director: req.body.newDirectors,
         genres: req.body.newGenres,
         actors: req.body.newActors,
         runtime: req.body.newRuntime,
@@ -90,8 +91,9 @@ exports.editMovie = async (req, res, next) => {
         ageRating: req.body.newRating,
         price: req.body.newPrice,
         poster: req.body.newPoster,
-        trailer: req.body.newTrailer
-      }}
+        trailer: req.body.newTrailer,
+      },
+    }
   );
 
   const editedMovie = await dbMovie.findById(req.params.id);
@@ -109,9 +111,6 @@ exports.editMovie = async (req, res, next) => {
   toEdit.poster = editedMovie.poster;
   toEdit.trailer = editedMovie.trailer;
 
-  res.redirect('/movieslist/' + req.params.id);
+  res.redirect("/movieslist/" + req.params.id);
   console.log("Edited: " + req.params.id);
 };
-
-
-

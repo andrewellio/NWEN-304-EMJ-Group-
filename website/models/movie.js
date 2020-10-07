@@ -55,7 +55,7 @@ module.exports = class Movie {
         console.log("Added: " + newMovie.title);
       });
       console.log("Finished loading DB");
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
@@ -94,6 +94,10 @@ module.exports = class Movie {
     });
   }
 
+  static getLatest() {
+    return movies[movies.length - 1];
+  }
+
   order() {
     movies.sort();
   }
@@ -101,14 +105,12 @@ module.exports = class Movie {
   static delete(id) {
     const toDelete = this.search(id);
     var i = 0;
-		while(i < movies.length) {
-			if(movies[i] == toDelete){
-				movies.splice(i, 1);
-			} else {
-				i = i + 1;
-			}
-		}
+    while (i < movies.length) {
+      if (movies[i] == toDelete) {
+        movies.splice(i, 1);
+      } else {
+        i = i + 1;
+      }
+    }
   }
 };
-
-
