@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -27,8 +28,8 @@ app.use(function (req, res, next) {
 });
 
 //Db Connection Start
-const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+mongoose.set('useUnifiedTopology', true);
 mongoose.connect(
   "mongodb+srv://webapp:m4rs4f031998@moviedatabase.pwl6x.azure.mongodb.net/MovieDB?retryWrites=true&w=majority",
   { useNewUrlParser: true }
@@ -36,7 +37,7 @@ mongoose.connect(
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
-  console.log("mongoSB connection success - active");
+  console.log("mongoDB connection success - active");
   // we're connected!
 });
 

@@ -59,8 +59,7 @@ exports.addMovie = async (req, res, next) => {
 
     uploadedMovie.add();
     res.redirect('/upload');
-
-    console.log('Added movie: ' + savedMovie.title);
+    console.log('Added: ' + savedMovie.title);
 
   } catch(err) {
     console.log('error');
@@ -68,10 +67,10 @@ exports.addMovie = async (req, res, next) => {
 };
 
 exports.removeMovie = async (req, res, next) => {
-  console.log(req.params.id);
   const removedMovie = await dbMovie.deleteOne({_id: req.params.id});
   Movie.delete(req.params.id);
   res.redirect('/movieslist');
+  console.log("Removed: " + req.params.id);
 };
 
 exports.editMovie = async (req, res, next) => {
@@ -111,7 +110,6 @@ exports.editMovie = async (req, res, next) => {
   toEdit.trailer = editedMovie.trailer;
 
   res.redirect('/movieslist/' + req.params.id);
-
   console.log("Edited: " + req.params.id);
 };
 

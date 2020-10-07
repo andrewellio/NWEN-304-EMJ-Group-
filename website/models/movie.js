@@ -34,7 +34,7 @@ module.exports = class Movie {
   //Gets movies from db and stores details locally
   static async loadDB() {
     try {
-      console.log("hello");
+      console.log("Loading DB...");
       const dbmovies = await dbMovie.find();
       dbmovies.forEach(function (movie) {
         var newMovie = new Movie(
@@ -54,6 +54,7 @@ module.exports = class Movie {
         newMovie.add();
         console.log("Added: " + newMovie.title);
       });
+      console.log("Finished loading DB");
     } catch(err) {
       console.log(err);
     }
