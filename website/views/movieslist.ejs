@@ -4,9 +4,7 @@
 </head>
 
 <body>
-  <p>This is what is known as the Movie List page (Hello there!)</p>
-
-  <a href="/movie">Movie</a>
+  <h1>Movies</h1>
 
   <p>Filter by Genres</p>
   <Label>Action</Label>
@@ -37,7 +35,14 @@
         <td>
           <a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a>
         </td>
-        <td>Poster</td>
+        <td>
+          <img
+            style="margin-left: 40%"
+            width="20%"
+            src="<%= movies[i].poster %>"
+            alt=""
+          />
+        </td>
         <td><%= movies[i].director %></td>
         <td><%= movies[i].actors.join(", ") %></td>
         <td><%= movies[i].genres.join(", ") %></td>
