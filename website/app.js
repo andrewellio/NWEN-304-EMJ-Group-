@@ -3,6 +3,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -20,22 +21,24 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/index", indexRouter);
-app.use("/home", indexRouter);
-app.use("/movie", indexRouter);
-app.use("/movie-test", indexRouter);
-app.use("/movieslist", indexRouter);
-app.use("/search", indexRouter);
-app.use("/shoppingcart", indexRouter);
-app.use("/myaccount", indexRouter);
-app.use("/login", indexRouter);
-app.use("/register", indexRouter);
-app.use("/upload", indexRouter);
-app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
+});
+
+//Db Connection Start
+mongoose.Promise = global.Promise;
+mongoose.set('useUnifiedTopology', true);
+mongoose.connect(
+  "mongodb+srv://webapp:m4rs4f031998@moviedatabase.pwl6x.azure.mongodb.net/MovieDB?retryWrites=true&w=majority",
+  { useNewUrlParser: true }
+);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("mongoDB connection success - active");
+  // we're connected!
 });
 
 // error handler
