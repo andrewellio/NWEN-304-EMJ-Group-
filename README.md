@@ -18,7 +18,7 @@ If Auto DevOps is not already enabled for this project, you can [turn it on](htt
 
 Note: This should be done before launching the EMJ website. (Required for EMJ Website Controller and database operations).
 
-1. If you haven't already, clone the repository.
+1. Clone the GitLab repository using HTTPS to any NodeJS/Javascript IDE. (e.g. Visual Studio Code)
 2. Open a terminal/commandprompt/powershell or inside the IDE.
 3. Move into the 'api' directory and run the command `npm install`.
 4. Run the command `npm start`.
@@ -27,7 +27,7 @@ Note: This should be done before launching the EMJ website. (Required for EMJ We
 
 Note: NodeJS and npm is required to be installed.
 
-1. Clone the GitLab repository using HTTPS to any NodeJS/Javascript IDE. (e.g. Visual Studio Code)
+1. If you haven't already, clone the repository.
 2. Open a terminal/commandprompt/powershell or inside the IDE.
 3. Move into the 'website' directory and run the command `npm install`. (generating a node_modules folder)
 4. Run the command `npm start` and browse to 'localhost:3000' in a browser URL.
