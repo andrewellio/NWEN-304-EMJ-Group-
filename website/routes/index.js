@@ -6,8 +6,13 @@ const User = require("../dbmodels/User");
 
 
 /* GET index page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+// router.get("/", function (req, res, next) {
+//   res.render("index", { title: "Express" });
+// });
+
+/* GET index page (redirect). */
+router.get("/", controller.getHomePage, function (req, res, next) {
+  res.render("home", { title: "Express" });
 });
 
 /* GET home page. */
@@ -41,12 +46,12 @@ router.get("/movie-test", function (req, res, next) {
 router.get("/search", controller.getSearchPage);
 
 /* GET cart page. */
-router.get("/shoppingcart", function (req, res, next) {
+router.get("/shoppingcart", controller.getShoppingCartPage, function (req, res, next) {
   res.render("shoppingcart", { title: "Express" });
 });
 
 /* GET account page. */
-router.get("/myaccount", function (req, res, next) {
+router.get("/myaccount", controller.getAccountPage, function (req, res, next) {
   res.render("myaccount", { title: "Express" });
 });
 

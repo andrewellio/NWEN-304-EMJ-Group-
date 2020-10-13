@@ -25,6 +25,21 @@ exports.getHomePage = (req, res, next) => {
   res.render("home", { movie: featuredMovie });
 };
 
+exports.getShoppingCartPage = (req, res, next) => {
+  test = [];
+  shoppingCart = Movie.allByTitle();
+  //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
+  res.render("shoppingcart", { movies: shoppingCart });
+};
+
+exports.getAccountPage = (req, res, next) => {
+  test = [];
+  pastPurchases = Movie.allByTitle();
+  //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
+  res.render("myaccount", { movies: pastPurchases });
+};
+
+
 exports.addMovie = async (req, res, next) => {
   const dbmovie = new dbMovie({
     title: req.body.title,
