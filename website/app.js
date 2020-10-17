@@ -5,10 +5,32 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 
+var passport = require("passport");
+var bodyParser = require("body-parser");
+var User = require("./dbmodels/User"); 
+var LocalStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(require("express-session")({
+  secret:"randomlygeneratedsecretkey",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy({usernameField:"usr", passwordField:"psw"}, User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
