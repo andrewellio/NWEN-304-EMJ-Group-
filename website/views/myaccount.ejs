@@ -8,55 +8,23 @@
   <div>
     <h1>My account</h1>
 
-    <p>Name</p>
+    <p>Name: <%= name %></p>
 
-    <p>Email</p>
+    <p>Email: <%= email %></p>
 
     <h2>Past purchases</h2>
 
     <div>
-      <div id="purchases" style="width: 50%;" >
-      
-
-         <table id="myTable">
-      <thead>
-        <tr>
-         
-          <th>Poster</th>
-          <th>Title</th>
-          <th>Price</th>
-        
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i = 0; i < movies.length; i++) {%>
-        <tr>
-         
-          <td>
-            <img
-            style="margin-left: 40%"
-            width="20%"
-            src="<%= movies[i].poster %>"
-            alt=""
-          />
-            </td>
-          <td><a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a></td>
-          <td>$<%= movies[i].price %></td>
-         
-        </tr>
-      <% } %>
-        
-      </tbody>
-    </table>
+      <div id="purchases">
+        <p>Title</p>
+        <p>Link</p>
+        <p>Price</p>
       </div>
-
-
 
       <div id="no-purchases">
         <p>You have no purchases</p>
       </div>
     </div>
-    <br>
 
     <button onClick="passwordFunction()">Want to change password?</button>
     <br />
@@ -82,13 +50,10 @@
 </body>
 
 <script>
-
-  var purchases = document.getElementById("myTable").rows.length-1;
-
+  var purchases = [];
 
   function loadPurchases() {
-    if (purchases > 0) {
-      
+    if (purchases.length > 0) {
       document.getElementById("purchases").style.display = "block";
       document.getElementById("no-purchases").style.display = "none";
     } else {
