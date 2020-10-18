@@ -23,17 +23,14 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 
 var app = express();
 
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(session({
   resave: false,
   saveUninitialized: true,
   secret: 'SECRET'
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser(function (user, cb) {
   cb(null, user);
