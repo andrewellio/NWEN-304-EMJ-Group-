@@ -18,4 +18,5 @@ router.delete('/:id', controller.deleteMovie);
 //Edit a movie
 router.patch('/:id', controller.editMovie);
 
+
 module.exports = router;

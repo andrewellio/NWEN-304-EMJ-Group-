@@ -6,37 +6,131 @@ Movie.loadDB();
 exports.getDynamicMovieDetails = (req, res, next) => {
   id = req.params.id;
   mov = Movie.search(id);
-  res.render("movie", { pageTitle: mov.title, movie: mov });
+  var cart = [];
+  admin = false;
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
+
+  res.render("movie", { pageTitle: mov.title, movie: mov, userLogged:userLoggedIn, shoppingCart:cart, admin:admin, type:typeUser });
 };
 
+function checkLoggedIn(req){
+  if(req.isAuthenticated()){
+    return true;
+
+  }
+
+  else{
+    return false;
+  }
+}
+
 exports.getMoviesPage = (req, res, next) => {
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
   movieList = Movie.allByTitle();
-  res.render("movieslist", { movies: movieList });
+  res.render("movieslist", { movies: movieList, type:typeUser });
 };
 
 exports.getSearchPage = (req, res, next) => {
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
   searchList = Movie.allByTitle();
-  res.render("search", { movies: searchList });
+  res.render("search", { movies: searchList, type:typeUser });
 };
 
 exports.getHomePage = (req, res, next) => {
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
   featuredMovie = Movie.getLatest();
   //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
-  res.render("home", { movie: featuredMovie });
+  res.render("home", { movie: featuredMovie, type:typeUser });
 };
 
 exports.getShoppingCartPage = (req, res, next) => {
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  var cart = [];
+  var shoppingCart = [];
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
+  for(var i =0; i<req.user.shoppingCart.length; i++){
+    var id = req.user.shoppingCart[i];
+    shoppingCart[i] = Movie.search(id);
+
+  }
+
   test = [];
-  shoppingCart = Movie.allByTitle();
+  //shoppingCart = Movie.allByTitle();
   //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
-  res.render("shoppingcart", { movies: shoppingCart });
+  res.render("shoppingcart", { movies: shoppingCart, type:typeUser });
 };
 
 exports.getAccountPage = (req, res, next) => {
+ 
   test = [];
   pastPurchases = Movie.allByTitle();
   //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
-  res.render("myaccount", { movies: pastPurchases });
+  res.render("myaccount", { purchases: pastPurchases});
 };
 
 

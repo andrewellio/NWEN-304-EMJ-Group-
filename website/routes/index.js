@@ -4,6 +4,12 @@ var controller = require("../controllers/moviesController.js");
 var mongoose = require("mongoose");
 const User = require("../dbmodels/User");
 const passport = require("passport");
+const Movie = require("../models/movie");
+const dbMovie = require("../dbmodels/Movie");
+
+
+
+
 
 /* GET index page. */
 router.get("/", function (req, res, next) {
@@ -20,6 +26,7 @@ router.get("/movieslist", controller.getMoviesPage);
 
 /* GET movie page. */
 router.get("/movie", function (req, res, next) {
+  
   res.render("movie", { title: "Express" });
 });
 
@@ -32,24 +39,43 @@ router.post("/movieslist/:id", controller.editMovie);
 /* Delete movie*/
 router.post("/movieslist/delete/:id", controller.removeMovie);
 
-/* GET movie page. */
-router.get("/movie-test", function (req, res, next) {
-  res.render("movie-test", { title: "Express" });
-});
-
 /* GET search page. */
 router.get("/search", controller.getSearchPage);
 
 /* GET cart page. */
-router.get("/shoppingcart", function (req, res, next) {
+router.get("/shoppingcart", controller.getShoppingCartPage, function (req, res, next) {
   res.render("shoppingcart", { title: "Express" });
 });
 
 /* GET account page. */
-router.get("/myaccount",isLoggedIn, function (req, res, next) {
+router.get("/myaccount",isLoggedIn,  function (req, res, next) {
+
+  
+  
+
   console.log(req.user);
-  res.render("myaccount", { name: req.user.name, email: req.user.email});
+ 
+  pastPurchases = [];
+  
+
+   for(var i =0; i<req.user.pastPurchases.length; i++){
+     var id = req.user.pastPurchases[i];
+     pastPurchases[i] = Movie.search(id);
+
+   }
+  //console.log(pastPurchases);
+  //movies: pastPurchases
+ 
+  res.render("myaccount", { name: req.user.name, email: req.user.email, movies: pastPurchases});
+
 });
+
+/*
+const Movie = require("../models/movie");
+const dbMovie = require("../dbmodels/Movie");
+
+Movie.loadDB();
+*/
 
 /* GET login page. */
 router.get("/login", function (req, res, next) {
@@ -69,11 +95,12 @@ router.get("/register", function (req, res, next) {
 
 /* POST register page */
 router.post("/register", function (req, res, next) {
-  User.register(new User({name: req.body.name , email: req.body.email, username: req.body.usr}), req.body.psw, function(err, user) {
+  User.register(new User({name: req.body.name , email: req.body.email, username: req.body.usr, admin: false, shoppingCart: [], pastPurchases: []}), req.body.psw, function(err, user) {
     if (err) {
       console.log(err);
       return res.render('register', { user : user });
     }
+    
     
     passport.authenticate('local')(req, res, function () {
       res.redirect('/myaccount');
@@ -93,7 +120,21 @@ function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
   }
+ 
   res.render("/login");
 }
+
+function checkLoggedIn(req){
+  if(req.isAuthenticated()){
+    return true;
+
+  }
+
+  else{
+    return false;
+  }
+}
+
+
 
 module.exports = router;
