@@ -1,5 +1,6 @@
 const Movie = require ('../models/Movie.js');
 
+
 //Get all movies
 exports.getAllMovies = async (req, res) => {
   try {

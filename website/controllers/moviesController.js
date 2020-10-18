@@ -1,7 +1,9 @@
 const Movie = require("../models/movie");
 const dbMovie = require("../dbmodels/Movie");
 
+
 Movie.loadDB();
+
 
 exports.getDynamicMovieDetails = (req, res, next) => {
   id = req.params.id;

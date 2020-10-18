@@ -37,7 +37,7 @@ router.get("/movieslist/:id", controller.getDynamicMovieDetails);
 router.post("/movieslist/:id", controller.editMovie);
 
 /* Delete movie*/
-router.post("/movieslist/delete/:id", controller.removeMovie);
+router.post("/shoppingcart/:id", controller.removeMovie);
 
 /* GET search page. */
 router.get("/search", controller.getSearchPage);
@@ -49,10 +49,6 @@ router.get("/shoppingcart", controller.getShoppingCartPage, function (req, res, 
 
 /* GET account page. */
 router.get("/myaccount",isLoggedIn,  function (req, res, next) {
-
-  
-  
-
   console.log(req.user);
  
   pastPurchases = [];
@@ -63,19 +59,12 @@ router.get("/myaccount",isLoggedIn,  function (req, res, next) {
      pastPurchases[i] = Movie.search(id);
 
    }
-  //console.log(pastPurchases);
-  //movies: pastPurchases
  
   res.render("myaccount", { name: req.user.name, email: req.user.email, movies: pastPurchases});
 
 });
 
-/*
-const Movie = require("../models/movie");
-const dbMovie = require("../dbmodels/Movie");
 
-Movie.loadDB();
-*/
 
 /* GET login page. */
 router.get("/login", function (req, res, next) {
