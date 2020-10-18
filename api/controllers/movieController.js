@@ -4,6 +4,14 @@ const router = require('../routes/routes.js');
 const jwt = require('jsonwebtoken');
 
 //Register a user
+exports.register = async(req, res) => {
+  User.register(new User({name: req.body.name , email: req.body.email, username: req.body.usr}), req.body.psw, function(err, user) {
+    if (err) {
+      res.status(400).send('Invalid details');
+    }
+    res.send('You are now registered');
+  });
+}
 
 //Login a user
 exports.login = async(req, res) => {

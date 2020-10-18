@@ -4,6 +4,7 @@ var controller = require("../controllers/movieController.js");
 const passport = require("passport");
 
 //Register
+router.post('/register', controller.register);
 
 //Login
 router.post('/login', passport.authenticate('local'), controller.login);
