@@ -137,4 +137,16 @@ router.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+function checkLoggedIn(req){
+  if(req.isAuthenticated()){
+    return true;
+
+  }
+
+  else{
+    return false;
+  }
+}
+
+
 module.exports = router;
