@@ -6,11 +6,7 @@ const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     usr: String,
-    admin: Boolean,
-    shoppingCart: [String],
-    pastPurchases: [String],
-    psw: String
-    
+    psw: String,
   });
 
   userSchema.plugin(passportLocalMongoose);

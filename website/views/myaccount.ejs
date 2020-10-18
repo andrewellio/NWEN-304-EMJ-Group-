@@ -1,4 +1,4 @@
-<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
+<%- include('layout.ejs') %> <%- include('partials/navbarUser') %>
 
 <head>
   <title>Account</title>
@@ -16,15 +16,38 @@
 
     <div>
       <div id="purchases">
-        <p>Title</p>
-        <p>Link</p>
-        <p>Price</p>
+
+
+        <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+         
+            <th>Price</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = 0; i < movies.length; i++) {%>
+          <tr style="padding: 15px">
+            <td>
+              <a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a>
+            </td>
+  
+            <td>$<%= movies[i].price %></td>
+          
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+        
       </div>
 
       <div id="no-purchases">
         <p>You have no purchases</p>
       </div>
     </div>
+    <br>
 
     <button onClick="passwordFunction()">Want to change password?</button>
     <br />
@@ -48,9 +71,14 @@
     <button onClick="location.href = 'login'">LOGOUT</button>
   </div>
 </body>
-
+<style>
+  th,
+  td {
+    padding: 15px;
+  }
+</style>
 <script>
-  var purchases = [];
+  var purchases = "<%= movies %>";
 
   function loadPurchases() {
     if (purchases.length > 0) {
