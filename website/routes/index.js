@@ -96,4 +96,28 @@ function isLoggedIn(req, res, next){
   res.render("/login");
 }
 
+/* GET facebook page. */
+router.get("/facebook", function (req, res, next) {
+  res.render("facebook", { title: "Express" });
+});
+
+router.get("/facebookLog", function (req, res, next) {
+  res.render("myaccount", { name: 'Facebook User', email: 'User Email'})
+});
+
+router.get('/auth/facebook', passport.authenticate((['local', 'facebook']), {
+  scope: ['public_profile', 'email']
+}));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate((['local', 'facebook']), {
+    successRedirect: '/facebookLog',
+    failureRedirect: '/error'
+  }));
+
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
 module.exports = router;
