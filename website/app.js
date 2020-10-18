@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
+const session = require('express-session');
 
 var passport = require("passport");
 var bodyParser = require("body-parser");
@@ -14,7 +15,45 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
+
+const config = require('./routes/config')
+
+//FACEBOOK OAUTH
+const FacebookStrategy = require('passport-facebook').Strategy;
+
 var app = express();
+
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: 'SECRET'
+}));
+
+
+passport.serializeUser(function (user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function (obj, cb) {
+  cb(null, obj);
+});
+
+passport.use(new FacebookStrategy({
+    clientID: config.facebookAuth.clientID,
+    clientSecret: config.facebookAuth.clientSecret,
+    callbackURL: config.facebookAuth.callbackURL
+  }, function (accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+  }
+));
+
+
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(require("express-session")({
@@ -22,9 +61,6 @@ app.use(require("express-session")({
   resave: false,
   saveUninitialized: false
 }));
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 passport.use(new LocalStrategy({usernameField:"usr", passwordField:"psw"}, User.authenticate()));
 passport.serializeUser(User.serializeUser());
