@@ -1,4 +1,5 @@
-<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
+
+<%- include('layout.ejs') %> <%- include('partials/navbar'+ type) %>
 
 <head>
   <title><%= movie.title %></title>
@@ -32,6 +33,7 @@
     <p><b>Price:</b> $<%= movie.price %></p>
 
     <p><b>Trailer:</b></p>
+   
     <iframe
       width="560"
       height="315"
@@ -43,19 +45,22 @@
     <br />
     <br />
 
+    <button onclick="ID()">ID</button>
+
     <button id="add-to-cart" onclick="addToCart()">Add to Cart</button> <br />
     <button id="remove-from-cart" onclick="addToCart()">
       Remove from Cart
     </button>
     <br />
 
-    <button id="login">Log in to add to cart</button> <br />
+    <button id="login" onclick="location.href='/login'">Log in to add to cart</button> <br />
 
     <button
       id="edit"
       onclick="toggleEdit()"
       type="button"
       class="btn btn-primary"
+      style="display: none;"
     >
       Edit
     </button>
@@ -129,6 +134,7 @@
 <%= movie.summary %> </textarea
       >
 
+
       <br />
       <label for="">Price</label>
       <input type="number" value="<%= movie.price %>" name="newPrice" id="newPrice" />
@@ -160,15 +166,30 @@
     >
       Delete
     </button>
+    
     </form>
   </div>
 </body>
 
+
 <script>
+  var navbarString = 'partials/<%=type %>Navbar.ejs';
+
+  console.log('partials/<%=type %>Navbar.ejs');
+ var id = "<%= movie.id %>";
   var guest = false;
-  var admin = true;
+  var adminUser = false;
   var editingMode = false;
   var inCart = false;
+  var cartString = "<%= shoppingCart %>";
+  var cart = cartString.split(",");
+  var loggedIn = ("<%= userLogged %>" =="true");
+  console.log(loggedIn);
+  
+  //movie.actors.join(", ")
+
+  
+  
 
   function toggleEdit() {
     console.log("toggleEdit");
@@ -176,25 +197,65 @@
     editing();
   }
 
+  function ID(){
+    console.log(id);
+  }
+
   function setup() {
-    if (inCart) {
+
+    console.log(loggedIn);
+ 
+    if(loggedIn){
+     
+      guest = false;
+    
+      
+      
+      
+      if(cart.includes(id)){
+        inCart = true;
+      }
+      else{
+        inCart = false;
+      }
+
+      if("<%= admin %>" =="true"){
+
+        adminUser = true;
+      }
+      console.log("admin " + adminUser);
+      
+    }
+    else{
+      guest = true;
+      inCart = false;
+    }
+
+
+    
+    document.getElementById("<%= movie.ageRating %>rating").selected = true;
+    document.getElementById("editView").style.display = "none";
+    document.getElementById("readView").style.display = "block";
+    if (guest) {
+      document.getElementById("add-to-cart").style.display = "none";
+      document.getElementById("remove-from-cart").style.display = "none";
+      document.getElementById("edit").style.display = "none";
+      document.getElementById("login").style.display = "block";
+    } else {
+      if (inCart) {
       document.getElementById("add-to-cart").style.display = "none";
       document.getElementById("remove-from-cart").style.display = "block";
     } else {
       document.getElementById("add-to-cart").style.display = "block";
       document.getElementById("remove-from-cart").style.display = "none";
     }
-    document.getElementById("<%= movie.ageRating %>rating").selected = true;
-    document.getElementById("editView").style.display = "none";
-    document.getElementById("readView").style.display = "block";
-    if (guest) {
-      document.getElementById("add-to-cart").style.display = "none";
-      document.getElementById("edit").style.display = "none";
-      document.getElementById("login").style.display = "block";
-    } else {
+
+
       document.getElementById("login").style.display = "none";
-      document.getElementById("add-to-cart").style.display = "block";
-      if (admin) {
+     
+      console.log(adminUser);
+      if (adminUser) {
+        document.getElementById("edit").style.display = "block";
       } else {
         document.getElementById("edit").style.display = "none";
       }

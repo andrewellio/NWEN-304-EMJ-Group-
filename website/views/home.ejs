@@ -1,11 +1,15 @@
-<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
+<%- include('layout.ejs') %> 
+
+<%- include('partials/navbar'+ type) %>
+
+
 
 <head>
   <title>Home</title>
 </head>
 
 <body>
-  <h1>Home</h1>
+  <h1>Home </h1>
   <br />
   <h2>Latest movie</h2>
   <a href="/movieslist/<%= movie.id %>">
@@ -13,6 +17,7 @@
 
     <img src="<%= movie.poster %>" style="width: 40%" alt="" />
   </a>
+
 
   <!-- 
 
@@ -29,3 +34,5 @@ posts.forEach(function(post){
      }); 
     een (when scrolled to top), and that it scales nicely on all screen sizes. -->
 </body>
+
+<script></script>

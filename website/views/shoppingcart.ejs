@@ -1,4 +1,4 @@
-<%- include('layout.ejs') %> <%- include('partials/navbar.ejs') %>
+<%- include('layout.ejs') %> <%- include('partials/navbar'+ type) %>
 
 <head>
   <title>Shopping Cart</title>
@@ -46,11 +46,16 @@
       </tbody>
     </table>
 
-    <button>Proceed to checkout</button>
+    <button onclick="checkout()">Proceed to checkout</button>
   </div>
 </body>
 <script>
   var cartLength = document.getElementById("myTable").rows.length-1;
+
+  function checkout(){
+    alert("They are in your checkout");
+    window.location.href = "/myaccount";
+  }
 
   function updateCartLengthDelete(){
     cartLength = cartLength - 1;

@@ -20,6 +20,7 @@ exports.login = async(req, res) => {
   res.header('jwt', token).send(token);
 };
 
+
 //Get all movies
 exports.getAllMovies = async (req, res) => {
   try {
