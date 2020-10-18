@@ -1,21 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const Movie = require ('../models/Movie.js');
 var controller = require("../controllers/movieController.js");
+const passport = require("passport");
+
+//Register
+
+//Login
+router.post('/login', passport.authenticate('local'), controller.login);
 
 //Get all movies
-router.get('/', controller.getAllMovies);
+router.get('/movies', controller.getAllMovies);
 
 //Get a movie
-router.get('/:id', controller.getMovieById);
+router.get('/movies/:id', controller.getMovieById);
 
 //Add a movie
-router.post('/', controller.addMovie);
+router.post('/movies', controller.addMovie);
 
 //Delete a movie
-router.delete('/:id', controller.deleteMovie);
+router.delete('/movies/:id', controller.deleteMovie);
 
 //Edit a movie
-router.patch('/:id', controller.editMovie);
+router.patch('/movies/:id', controller.editMovie);
 
 module.exports = router;
