@@ -39,6 +39,25 @@ function checkLoggedIn(req){
   }
 }
 
+exports.getIndexPage = (req, res) => {
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
+  res.render("index", { type:typeUser });
+
+}
+
 exports.getMoviesPage = (req, res, next) => {
   userLoggedIn = Boolean;
   userLoggedIn = checkLoggedIn(req);
