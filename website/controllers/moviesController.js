@@ -1,9 +1,7 @@
 const Movie = require("../models/movie");
 const dbMovie = require("../dbmodels/Movie");
 
-
 Movie.loadDB();
-
 
 exports.getDynamicMovieDetails = (req, res, next) => {
   id = req.params.id;
@@ -139,14 +137,18 @@ exports.getShoppingCartPage = (req, res, next) => {
   for(var i =0; i<req.user.shoppingCart.length; i++){
     var id = req.user.shoppingCart[i];
     shoppingCart[i] = Movie.search(id);
-    //console.log(shoppingCart[i].title);
 
   }
 
-  test = [];
-  //shoppingCart = Movie.allByTitle();
-  //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
-  res.render("shoppingcart", { movies: shoppingCart, moviesIDs: moviesIDs. type:typeUser });
+  if(shoppingCart.length>0){
+    res.render("shoppingcart", { movies: shoppingCart, moviesIDs: moviesIDs, type:typeUser });
+  }
+
+  else{
+    res.render("shoppingcart-empty", { movies: shoppingCart, moviesIDs: moviesIDs, type:typeUser });
+  }
+ 
+  
 };
 
 exports.getAccountPage = (req, res, next) => {

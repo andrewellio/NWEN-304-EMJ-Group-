@@ -49,23 +49,13 @@ router.get("/shoppingcart", controller.getShoppingCartPage, function (req, res, 
 
 /* GET account page. */
 router.get("/myaccount", isLoggedIn, function (req, res, next) {
-  console.log(req.user);
-  
- 
   pastPurchases = [];
-  
-
    for(var i =0; i<req.user.pastPurchases.length; i++){
      var id = req.user.pastPurchases[i];
      pastPurchases[i] = Movie.search(id);
-
    }
- 
   res.render("myaccount", { name: req.user.name, email: req.user.email, movies: pastPurchases});
-
 });
-
-
 
 /* GET login page. */
 router.get("/login", function (req, res, next) {
@@ -155,7 +145,6 @@ router.post("/shoppingCart/add/:id", async function (req, res, next) {
       }
     );
 
-  
     
     res.redirect("/movieslist/" + req.params.id);
     
