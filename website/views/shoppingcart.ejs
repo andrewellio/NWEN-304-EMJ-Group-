@@ -28,7 +28,10 @@
       <tbody>
         <% for(var i = 0; i < movies.length; i++) {%>
         <tr>
-          <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+          <td>
+            <form method = "POST", action = "/shoppingCart/delete/<%= movies[i].id %>">
+            <input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            </form>
           <td>
             <img
             style="margin-left: 40%"
