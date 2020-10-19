@@ -48,7 +48,7 @@ router.get("/shoppingcart", controller.getShoppingCartPage, function (req, res, 
 });
 
 /* GET account page. */
-router.get("/myaccount",isLoggedIn,  function (req, res, next) {
+router.get("/myaccount", isLoggedIn, function (req, res, next) {
   console.log(req.user);
  
   pastPurchases = [];
@@ -136,6 +136,85 @@ router.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
+
+//Shopping Cart Routes
+router.post("/shoppingCart/add/:id", async function (req, res, next) {
+  if(req.isAuthenticated()) {
+    const id = await req.user._id;
+
+    const updateduser = await User.updateOne(
+      { _id: id },
+      {
+        $push: {
+          shoppingCart: [req.params.id]
+        },
+      }
+    );
+    
+    res.redirect("/movieslist/" + req.params.id);
+  } else {
+    res.status(400).redirect("/movieslist/" + req.params.id);
+  }
+});
+
+router.post("/shoppingCart/delete/:id", async function (req, res, next) {
+  if(req.isAuthenticated()) {
+    const id = await req.user._id;
+
+    const updateduser = await User.updateOne(
+      { _id: id },
+      {
+        $pull: {
+          shoppingCart: req.params.id
+        },
+      }
+    );
+    
+    res.redirect("/movieslist/" + req.params.id);
+  } else {
+    res.status(400).redirect("/movieslist/" + req.params.id);
+  }
+});
+
+//Past Purchases Routes
+router.post("/pastPurchases/add/:id", async function (req, res, next) {
+  if(req.isAuthenticated()) {
+    const id = await req.user._id;
+
+    const updateduser = await User.updateOne(
+      { _id: id },
+      {
+        $push: {
+          pastPurchases: [req.params.id]
+        },
+      }
+    );
+    
+    res.redirect("/movieslist/" + req.params.id);
+  } else {
+    res.status(400).redirect("/movieslist/" + req.params.id);
+  }
+});
+
+router.post("/pastPurchases/delete/:id", async function (req, res, next) {
+  if(req.isAuthenticated()) {
+    const id = await req.user._id;
+
+    const updateduser = await User.updateOne(
+      { _id: id },
+      {
+        $pull: {
+          pastPurchases: req.params.id
+        },
+      }
+    );
+    
+    res.redirect("/movieslist/" + req.params.id);
+  } else {
+    res.status(400).redirect("/movieslist/" + req.params.id);
+  }
+});
+
 
 function checkLoggedIn(req){
   if(req.isAuthenticated()){
