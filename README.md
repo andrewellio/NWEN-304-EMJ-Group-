@@ -31,4 +31,8 @@ Note: NodeJS and npm is required to be installed.
 3. Move into the 'website' directory and run the command `npm install`. (
 4. Run the command `npm start` and browse to 'localhost:3000' in a browser URL.
 
+### Heroku Link
+
+https://emjmovies.herokuapp.com/
+
 
