@@ -40,6 +40,25 @@ function checkLoggedIn(req){
   }
 }
 
+exports.getIndexPage = (req, res) => {
+  userLoggedIn = Boolean;
+  userLoggedIn = checkLoggedIn(req);
+  var typeUser = "guest";
+  
+  if(userLoggedIn){
+    cart = req.user.shoppingCart;
+    console.log(cart);
+    typeUser = "user";
+    if(req.user.admin){
+      admin = true;
+      typeUser = "admin";
+    }
+
+  }
+  res.render("index", { type:typeUser });
+
+}
+
 exports.getMoviesPage = (req, res, next) => {
   userLoggedIn = Boolean;
   userLoggedIn = checkLoggedIn(req);
@@ -104,6 +123,7 @@ exports.getShoppingCartPage = (req, res, next) => {
   var typeUser = "guest";
   var cart = [];
   var shoppingCart = [];
+  var moviesIDs = [];
   
   if(userLoggedIn){
     cart = req.user.shoppingCart;
@@ -119,13 +139,14 @@ exports.getShoppingCartPage = (req, res, next) => {
   for(var i =0; i<req.user.shoppingCart.length; i++){
     var id = req.user.shoppingCart[i];
     shoppingCart[i] = Movie.search(id);
+    //console.log(shoppingCart[i].title);
 
   }
 
   test = [];
   //shoppingCart = Movie.allByTitle();
   //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
-  res.render("shoppingcart", { movies: shoppingCart, type:typeUser });
+  res.render("shoppingcart", { movies: shoppingCart, moviesIDs: moviesIDs, type:typeUser });
 };
 
 exports.getAccountPage = (req, res, next) => {
