@@ -146,7 +146,7 @@ exports.getShoppingCartPage = (req, res, next) => {
   test = [];
   //shoppingCart = Movie.allByTitle();
   //featuredMovie = Movie.search("5f7c0b617fbd2800a89ea326");
-  res.render("shoppingcart", { movies: shoppingCart, moviesIDs: moviesIDs type:typeUser });
+  res.render("shoppingcart", { movies: shoppingCart, moviesIDs: moviesIDs, type:typeUser });
 };
 
 exports.getAccountPage = (req, res, next) => {
