@@ -8,9 +8,10 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 chai.should();
 
-describe("Movies", () => {
+//Testing all gets for all pages
+describe("Page", () => {
     describe("GET /", () => {
-        it("should get all movies", (done) => {
+        it("should get index page", (done) => {
              chai.request(app)
                  .get('/')
                  .end((err, res) => {
@@ -19,27 +20,76 @@ describe("Movies", () => {
                      done();
                   });
          });
-        
-        it("should get a single movie", (done) => {
-             const id = 1;
+    });
+});
+
+describe("Page", () => {
+    describe("GET /login", () => {
+        it("should get login page", (done) => {
              chai.request(app)
-                 .get(getMovieById(id))
+                 .get('/login')
                  .end((err, res) => {
                      res.should.have.status(200);
                      res.body.should.be.a('object');
                      done();
                   });
          });
-         
-        
-        it("should not get a single student record", (done) => {
-             const id = 5;
+    });
+});
+
+describe("Page", () => {
+    describe("GET /register", () => {
+        it("should get register page", (done) => {
              chai.request(app)
-                 .get(`/${id}`)
+                 .get('/register')
                  .end((err, res) => {
-                     res.should.have.status(404);
+                     res.should.have.status(200);
+                     res.body.should.be.a('object');
                      done();
                   });
          });
     });
 });
+
+describe("Page", () => {
+    describe("GET /movieslist", () => {
+        it("should get movies page", (done) => {
+             chai.request(app)
+                 .get('/movieslist')
+                 .end((err, res) => {
+                     res.should.have.status(200);
+                     res.body.should.be.a('object');
+                     done();
+                  });
+         });
+    });
+});
+
+describe("Page", () => {
+    describe("GET /search", () => {
+        it("should get search page", (done) => {
+             chai.request(app)
+                 .get('/search')
+                 .end((err, res) => {
+                     res.should.have.status(200);
+                     res.body.should.be.a('object');
+                     done();
+                  });
+         });
+    });
+});
+
+describe("Page", () => {
+    describe("GET /upload", () => {
+        it("should get upload page", (done) => {
+             chai.request(app)
+                 .get('/upload')
+                 .end((err, res) => {
+                     res.should.have.status(200);
+                     res.body.should.be.a('object');
+                     done();
+                  });
+         });
+    });
+});
+
