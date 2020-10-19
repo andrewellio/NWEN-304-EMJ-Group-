@@ -1,4 +1,3 @@
-
 <%- include('layout.ejs') %> <%- include('partials/navbar'+ type) %>
 
 <head>
@@ -44,7 +43,6 @@
     ></iframe>
     <br />
     <br />
-    
  
     <form method = "POST", action = "/shoppingCart/add/<%= movie.id %>">
     <button id="add-to-cart" onclick="addToCart()" type="submit">Add to Cart</button> <br />
@@ -179,8 +177,6 @@
 
 <script>
   var navbarString = 'partials/<%=type %>Navbar.ejs';
-
-  console.log('partials/<%=type %>Navbar.ejs');
  var id = "<%= movie.id %>";
   var guest = false;
   var adminUser = false;
@@ -189,30 +185,14 @@
   var cartString = "<%= shoppingCart %>";
   var cart = cartString.split(",");
   var loggedIn = ("<%= userLogged %>" =="true");
-  console.log(loggedIn);
-  
-  //movie.actors.join(", ")
-
-  
-  
-
   function toggleEdit() {
-    console.log("toggleEdit");
     editingMode = !editingMode;
     editing();
   }
 
-  function setup() {
-
-    console.log(loggedIn);
- 
+  function setup() { 
     if(loggedIn){
-     
       guest = false;
-    
-      
-      
-      
       if(cart.includes(id)){
         inCart = true;
       }
@@ -224,8 +204,7 @@
 
         adminUser = true;
       }
-      console.log("admin " + adminUser);
-      
+
     }
     else{
       guest = true;
@@ -302,6 +281,5 @@
     var updatedPoster = document.getElementById("newPoster").value;
     var updatedTrailer = document.getElementById("newTrailer").value;
 
-    //document.location.reload();
   }
 </script>
