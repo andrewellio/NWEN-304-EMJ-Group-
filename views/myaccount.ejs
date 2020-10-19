@@ -1,0 +1,103 @@
+<%- include('layout.ejs') %> <%- include('partials/navbarUser') %>
+
+<head>
+  <title>Account</title>
+</head>
+
+<body onload="loadPurchases()">
+  <div>
+    <h1>My account</h1>
+
+    <p>Name: <%= name %></p>
+
+    <p>Email: <%= email %></p>
+
+    <h2>Past purchases</h2>
+
+    <div>
+      <div id="purchases">
+
+
+        <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+         
+            <th>Price</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = 0; i < movies.length; i++) {%>
+          <tr style="padding: 15px">
+            <td>
+              <a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a>
+            </td>
+  
+            <td>$<%= movies[i].price %></td>
+          
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+        
+      </div>
+
+      <div id="no-purchases">
+        <p>You have no purchases</p>
+      </div>
+    </div>
+    <br>
+
+    <button onClick="passwordFunction()">Want to change password?</button>
+    <br />
+    <div id="changePassword" style="display: none">
+      <form>
+        <label for="">Current Password</label>
+        <input type="text" required />
+        <hr />
+        <label for="">New Password</label>
+        <input type="text" required />
+        <hr />
+        <label for="">Re-type new password</label>
+        <input type="text" required />
+        <hr />
+      </form>
+      <p>Forgot your password?</p>
+      <br />
+      <button>Change password</button>
+    </div>
+    <br />
+    <button onClick="location.href = 'logout'">LOGOUT</button>
+  </div>
+</body>
+<style>
+  th,
+  td {
+    padding: 15px;
+  }
+</style>
+<script>
+  var purchases = "<%= movies %>";
+
+  function loadPurchases() {
+    if (purchases.length > 0) {
+      document.getElementById("purchases").style.display = "block";
+      document.getElementById("no-purchases").style.display = "none";
+    } else {
+      document.getElementById("purchases").style.display = "none";
+      document.getElementById("no-purchases").style.display = "block";
+    }
+  }
+
+  function passwordFunction() {
+    var x = document.getElementById("changePassword");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+     
+</script>

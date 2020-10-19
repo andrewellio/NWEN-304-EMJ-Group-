@@ -1,0 +1,38 @@
+<%- include('layout.ejs') %> 
+
+<%- include('partials/navbar'+ type) %>
+
+
+
+<head>
+  <title>Home</title>
+</head>
+
+<body>
+  <h1>Home </h1>
+  <br />
+  <h2>Latest movie</h2>
+  <a href="/movieslist/<%= movie.id %>">
+    <h2><%=movie.title %></h2>
+
+    <img src="<%= movie.poster %>" style="width: 40%" alt="" />
+  </a>
+
+
+  <!-- 
+
+    
+posts.forEach(function(post){ 
+
+    <a href="/posts/post._id ">
+      <h3>post.title </h3>
+    </a>
+    
+    <img width="470" height="320" src="" ="post.feedImg" % /> alt=""> <br />
+    <br />
+    
+     }); 
+    een (when scrolled to top), and that it scales nicely on all screen sizes. -->
+</body>
+
+<script></script>

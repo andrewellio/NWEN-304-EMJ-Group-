@@ -1,0 +1,77 @@
+<%- include('layout.ejs') %> <%- include('partials/navbar'+ type) %>
+<head>
+  <title>Movies</title>
+</head>
+
+<body>
+  <h1>Movies</h1>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Poster</th>
+        <th>Director(s)</th>
+        <th>Cast</th>
+        <th>Genres</th>
+        <th>Length (in minutes)</th>
+        <th>Year</th>
+        <th>Price</th>
+        <th>Age Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < movies.length; i++) {%>
+      <tr style="padding: 15px">
+        <td>
+          <a href="/movieslist/<%= movies[i].id %>"><%= movies[i].title %></a>
+        </td>
+        <td>
+          <img
+            style="margin-left: 40%"
+            width="20%"
+            src="<%= movies[i].poster %>"
+            alt=""
+          />
+        </td>
+        <td><%= movies[i].director %></td>
+        <td><%= movies[i].actors.join(", ") %></td>
+        <td><%= movies[i].genres.join(", ") %></td>
+        <td><%= movies[i].runtime %></td>
+        <td><%= movies[i].release %></td>
+        <td>$<%= movies[i].price %></td>
+        <td><%= movies[i].ageRating %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+<script>
+  var genres = [];
+  var decades = [];
+  var ageRatings = [];
+  //  Latest to Earliest
+  //Order by Title, Price, Length
+
+  function changeFilter() {}
+
+  function getList() {
+    //check filter
+    if (genres.length > 0) {
+    }
+
+    if (decades.length > 0) {
+    }
+
+    if (ageRatings.length > 0) {
+    }
+  }
+</script>
+
+<style>
+  th,
+  td {
+    padding: 15px;
+  }
+</style>

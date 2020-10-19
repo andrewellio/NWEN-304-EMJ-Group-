@@ -1,0 +1,122 @@
+<%- include('layout.ejs') %> <%- include('partials/navbar'+ type) %>
+
+<head>
+  <title>Search</title>
+</head>
+
+<body>
+  <h1>Search</h1>
+  <input
+    type="text"
+    id="myInput"
+    onkeyup="search()"
+    placeholder="Search for movies, directors and actors.."
+  />
+
+  <p>Searches input through titles, directors and actors</p>
+
+  <div id="search" style="display: none">
+    <h2>Results</h2>
+    <div id="results">
+      <p id="example"></p>
+    </div>
+
+    <ul id="searchMovies">
+      <% for(var i = 0; i < movies.length; i++) {%>
+
+      <li>
+        <a href="/movieslist/<%= movies[i].id %>"
+          ><%= movies[i].title %> | <%= movies[i].director %> | <%=
+          movies[i].actors.join(", ") %></a
+        >
+      </li>
+
+      <% } %>
+    </ul>
+  </div>
+</body>
+
+<style>
+  #myInput {
+    background-image: url("/css/searchicon.png"); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+
+  #searchMovies {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #searchMovies li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+  }
+
+  #searchMovies li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+  }
+</style>
+
+<script>
+  var array = ["movie"];
+
+  // function search() {
+  //   var x = document.getElementById("search");
+
+  //   x.style.display = "block";
+
+  //   if (array.length > 0) {
+  //     document.getElementById("results").style.display = "block";
+  //     document.getElementById("no-results").style.display = "none";
+  //     document.getElementById("example").innerHTML =
+  //       array.length + " results found";
+  //   } else {
+  //     document.getElementById("results").style.display = "none";
+  //     document.getElementById("no-results").style.display = "block";
+  //   }
+  // }
+
+  function search() {
+    var num = 0;
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+
+    console.log(document.getElementById("search"));
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("searchMovies");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+        num++;
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+    document.getElementById("example").innerHTML = num + " results found";
+
+    var x = document.getElementById("search");
+
+    if (document.getElementById("myInput").value == "") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+</script>

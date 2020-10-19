@@ -1,0 +1,82 @@
+<%- include('layout.ejs') %> <%- include('partials/navbarGuest') %>
+
+<head>
+  <title>Register</title>
+</head>
+
+
+
+  <!--If JS function is needed to assist with registration process, add below... onsubmit="complete_registration()"-->
+  <form method="POST">
+    <div class="container">
+      <h1>Register</h1>
+      <p>To create an account, please fill in the form below.</p>
+
+    <label for="name"><b>Full Name</b></label>
+    <input type="text" placeholder="Enter Full Name" name="name" id="name" required>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+    <label for="usr"><b>User Name</b></label>
+    <input type="text" placeholder="Enter User Name" name="usr" id="usr" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" onchange="validate_password()" placeholder="Enter Password" name="psw" id="psw" required>
+ 
+
+      <button type="submit" class="registerbtn"><b>Register</b></button>
+    </div>
+
+    <p>Already have an account? <a href="login">Log in</a>.</p>
+    <br>
+    <p>Login with <a href="facebook">FACEBOOK</a>.</p>
+  </form>
+</body>
+<style>
+  /* Full-width input fields */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* Set a style for the register button */
+  .registerbtn {
+    background-color: #4c98af;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: larger;
+  }
+
+  .registerbtn:hover {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  function validate_password() {
+    var str = document.getElementById("psw").value;
+    if (
+      !(
+        str.match(/[a-z]/g) &&
+        str.match(/[A-Z]/g) &&
+        str.match(/[0-9]/g) &&
+        str.match(/[^a-zA-Z\d]/g) &&
+        str.length >= 8
+      )
+    )
+      alert(
+        "Your password must contain 1 lowercase, uppercase, digit, special character and must also be at least 8 characters long."
+      );
+  }
+</script>
