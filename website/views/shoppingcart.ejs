@@ -29,8 +29,8 @@
         <% for(var i = 0; i < movies.length; i++) {%>
         <tr>
           <td>
-            <form method = "POST", action = "/shoppingCart/delete/<%= movies[i].id %>">
-            <input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            <form method = "POST", action = "/shoppingCart/deleteCartPage/<%= movies[i].id %>">
+            <input type="submit" value="Delete" /></td>
             </form>
           <td>
             <img
@@ -49,7 +49,10 @@
       </tbody>
     </table>
 
-    <button onclick="checkout()">Proceed to checkout</button>
+    <form method = "POST", action = "/pastPurchases/add/<%= movies[0].id %>">
+      <button onclick="checkout()">Proceed to checkout</button>
+    </form>
+    
   </div>
 </body>
 <script>
