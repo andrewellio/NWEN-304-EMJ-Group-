@@ -12,8 +12,8 @@ const dbMovie = require("../dbmodels/Movie");
 
 
 /* GET index page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+router.get("/", controller.getIndexPage, function (req, res, next) {
+  res.render("/", { title: "Express" });
 });
 
 /* GET home page. */
@@ -50,6 +50,7 @@ router.get("/shoppingcart", controller.getShoppingCartPage, function (req, res, 
 /* GET account page. */
 router.get("/myaccount", isLoggedIn, function (req, res, next) {
   console.log(req.user);
+  
  
   pastPurchases = [];
   
@@ -139,29 +140,36 @@ router.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-//Shopping Cart Routes
+//Shopping Cart Routes - from movie page
 router.post("/shoppingCart/add/:id", async function (req, res, next) {
   if(req.isAuthenticated()) {
     const id = await req.user._id;
 
     const updateduser = await User.updateOne(
       { _id: id },
+      
       {
         $push: {
           shoppingCart: [req.params.id]
         },
       }
     );
+
+  
     
     res.redirect("/movieslist/" + req.params.id);
+    
+   
   } else {
     res.status(400).redirect("/movieslist/" + req.params.id);
   }
 });
 
 router.post("/shoppingCart/delete/:id", async function (req, res, next) {
+  
   if(req.isAuthenticated()) {
     const id = await req.user._id;
+  
 
     const updateduser = await User.updateOne(
       { _id: id },
@@ -172,7 +180,32 @@ router.post("/shoppingCart/delete/:id", async function (req, res, next) {
       }
     );
     
+    
     res.redirect("/movieslist/" + req.params.id);
+  } else {
+    res.status(400).redirect("/movieslist/" + req.params.id);
+  }
+});
+
+
+//Shopping Cart Routes - from shopping cart page
+
+router.post("/shoppingCart/deleteCartPage/:id", async function (req, res, next) {
+  
+  if(req.isAuthenticated()) {
+    const id = await req.user._id;
+  
+
+    const updateduser = await User.updateOne(
+      { _id: id },
+      {
+        $pull: {
+          shoppingCart: req.params.id
+        },
+      }
+    );
+    
+    res.redirect("/shoppingCart");
   } else {
     res.status(400).redirect("/movieslist/" + req.params.id);
   }
@@ -188,6 +221,9 @@ router.post("/pastPurchases/add/:id", async function (req, res, next) {
       {
         $push: {
           pastPurchases: [req.params.id]
+        },
+        $pull: {
+          shoppingCart: req.params.id
         },
       }
     );
@@ -206,7 +242,7 @@ router.post("/pastPurchases/delete/:id", async function (req, res, next) {
       { _id: id },
       {
         $pull: {
-          pastPurchases: req.params.id
+          pastPurchases: [req.params.id]
         },
       }
     );
