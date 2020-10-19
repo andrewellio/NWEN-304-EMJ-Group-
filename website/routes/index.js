@@ -118,8 +118,10 @@ router.get("/facebook", function (req, res, next) {
   res.render("facebook", { title: "Express" });
 });
 
-router.get("/facebookLog", function (req, res, next) {
-  res.render("myaccount", { name: 'Facebook User', email: 'User Email'})
+router.get("/facebookLog",isLoggedIn,function(req, res, next) {
+  pastPurchases = [];
+ 
+    res.render("myaccount", { name: 'Facebook User - Purchases Not Available when using Facebook Login', email: "Facebook User Email", movies: pastPurchases});
 });
 
 router.get('/auth/facebook', passport.authenticate((['local', 'facebook']), {
