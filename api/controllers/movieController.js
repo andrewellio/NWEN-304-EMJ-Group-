@@ -118,11 +118,6 @@ exports.editMovie = async (req, res) => {
     return res.status(400).send('Invalid Token');
   }
 
-  try {
-    if(!removedMovie) {
-      res.send('Invalid movie');
-    }
-
     if(req.body.title !== undefined) {
       var updatedMovie = await Movie.updateOne(
         { _id: req.params.id }, 
