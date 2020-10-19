@@ -18,6 +18,7 @@ exports.getDynamicMovieDetails = (req, res, next) => {
     cart = req.user.shoppingCart;
     console.log(cart);
     typeUser = "user";
+    console.log(req.user.admin);
     if(req.user.admin){
       admin = true;
       typeUser = "admin";
@@ -180,8 +181,8 @@ exports.addMovie = async (req, res, next) => {
 exports.removeMovie = async (req, res, next) => {
   const removedMovie = await dbMovie.deleteOne({ _id: req.params.id });
   Movie.delete(req.params.id);
+  console.log("removed: " + req.params.id);
   res.redirect("/movieslist");
-  console.log("Removed: " + req.params.id);
 };
 
 exports.editMovie = async (req, res, next) => {

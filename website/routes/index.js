@@ -37,7 +37,7 @@ router.get("/movieslist/:id", controller.getDynamicMovieDetails);
 router.post("/movieslist/:id", controller.editMovie);
 
 /* Delete movie*/
-router.post("/shoppingcart/:id", controller.removeMovie);
+router.post("/movieslist/delete/:id", controller.removeMovie);
 
 /* GET search page. */
 router.get("/search", controller.getSearchPage);
@@ -215,6 +215,11 @@ router.post("/pastPurchases/delete/:id", async function (req, res, next) {
   } else {
     res.status(400).redirect("/movieslist/" + req.params.id);
   }
+});
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 
